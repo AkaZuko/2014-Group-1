@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry exported="true" kind="lib" path="/home/sukriti/Downloads/easymock-3.2/easymock-3.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/sukriti/Downloads/easymock-3.2/easymock-3.2-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/sukriti/Downloads/easymock-3.2/easymock-3.2-tests.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/sukriti/Downloads/easymock-3.2/easymock-3.2-samples.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/sukriti/Downloads/easymock-3.2/easymock-3.2-javadoc.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry exported="true" kind="lib" path="/home/sukriti/Downloads/cglib-master.zip"/>
+	<classpathentry exported="true" kind="lib" path="/home/sukriti/Downloads/cglib-master"/>
+	<classpathentry exported="true" kind="lib" path="/home/sukriti/Downloads/objenesis-tck-2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/sukriti/Downloads/cglib-3.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
