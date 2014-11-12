@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="spree_unittest/src"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="F:/Group-1/lib/easymock-3.2/easymock-3.2/easymock-3.2.jar"/>
+	<classpathentry kind="lib" path="F:/Group-1/lib/easymock-3.2/easymock-3.2/easymock-3.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="F:/Group-1/lib/easymock-3.2/easymock-3.2/easymock-3.2-samples.jar"/>
+	<classpathentry kind="lib" path="F:/Group-1/lib/easymock-3.2/easymock-3.2/easymock-3.2-sources.jar"/>
+	<classpathentry kind="lib" path="F:/Group-1/lib/easymock-3.2/easymock-3.2/easymock-3.2-tests.jar"/>
+	<classpathentry kind="lib" path="F:/Group-1/lib/mysql-connector-java-5.1.34-bin.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
