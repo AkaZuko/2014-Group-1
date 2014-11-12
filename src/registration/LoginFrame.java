@@ -24,9 +24,10 @@ public class LoginFrame {
 	private JButton btnregister;
 	private JFormattedTextField formattedTextField;
 	private JLabel lblNewLabel;
+	JLabel lblStatus;
 
 	private String ID;
-	private String password;
+	private char[] password;
 	/**
 	 * Launch the application.
 	 */
@@ -95,17 +96,30 @@ public class LoginFrame {
 		lblNewLabel = new JLabel("New participant?");
 		lblNewLabel.setBounds(163, 231, 127, 15);
 		frame.getContentPane().add(lblNewLabel);
+		
+		lblStatus = new JLabel("");
+		lblStatus.setBounds(204, 193, 46, 14);
+		frame.getContentPane().add(lblStatus);
 	}
 	
 	class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource().equals(btnregister)){
-				Registeration win = new Registeration();
+				RegisterationDetailFrame win = new RegisterationDetailFrame();
 				frame.setVisible(false);
 				frame = null;				
 			}
 			if(e.getSource().equals(btnLogin)){
-				
+				password = passwordField.getPassword();
+				ID = formattedTextField.getText();
+				if(Registeration.validateData(password, ID)) {
+					//ProfileFrame is displayed based upon the type of user
+					
+				}
+				else{
+					//error message is displayed
+					lblStatus.setText("Invalid ID/PASSWORD");
+				}
 			}
 			}
 			
