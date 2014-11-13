@@ -138,6 +138,10 @@ public class RegisterationDetailFrame {
 		 label6 = new JLabel("");
 		label6.setBounds(10, 175, 29, 14);
 		frame.getContentPane().add(label6);
+		
+		JLabel lblPassInst = new JLabel("*Password must be of 6 or more characters");
+		lblPassInst.setBounds(20, 231, 266, 14);
+		frame.getContentPane().add(lblPassInst);
 	}
 	
 	class Handler implements ActionListener {
@@ -150,16 +154,25 @@ public class RegisterationDetailFrame {
 			}
 		}
 			private Boolean validate(){
-				Boolean status = false;
-				String s1 = "([a-zA-Z]){1,} ([a-zA-Z]){1,}";
-				String s2 = "([:alnum:]){1,}+@([:lower:])+.com";
-				/*if(txtNamefield.getText().matches(s1)){
-					status = true;
-				}*/
-				if(txtEmailfield.getText().matches(s2)){
-					status = true;
-				}
-				return status;
+					
+				if(!txtNamefield.getText().matches("([a-zA-Z]){1,} ([a-zA-Z]){1,}")) label1.setText("*");
+				else label1.setText("");	
+				
+				if(!txtEmailfield.getText().matches("^[\\w-]+(?:\\.[\\w-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7}$")) label2.setText("*");
+				else label2.setText("");				
+				
+				if(txtPassfield.getText().isEmpty() || txtPassfield.getText().getBytes().length<6 ) label3.setText("*");
+				else label3.setText("");
+				
+				if(!txtAgefield.getText().matches("[1-9][0-9]?[0-9]?")) label4.setText("*");
+				else label4.setText("");
+				
+				if(!txtInstfield.getText().matches("([a-zA-Z ^0-9]){1,}")) label5.setText("*");
+				label5.setText("");
+				
+				if(txtNamefield.getText().matches("([a-zA-Z]){1,} ([a-zA-Z]){1,}") && txtEmailfield.getText().matches("^[\\w-]+(?:\\.[\\w-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7}$") && txtInstfield.getText().matches("([a-zA-Z ^0-9]){1,}") && (txtPassfield.getText().isEmpty() || txtPassfield.getText().getBytes().length<6) && txtAgefield.getText().matches("[1-9][0-9]?[0-9]?")) return true;
+				else return false;
+
 			}
 	}
 }
