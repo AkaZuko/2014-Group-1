@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DashboardFrame {
 
@@ -149,6 +152,15 @@ public class DashboardFrame {
 		txtrSchedule.setText("");
 		txtrSchedule.setBounds(10, 469, 414, 181);
 		frame.getContentPane().add(txtrSchedule);
+		
+		JButton btnClose = new JButton("Close");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+			}
+		});
+		btnClose.setBounds(315, 53, 89, 23);
+		frame.getContentPane().add(btnClose);
 		
 		
 	}

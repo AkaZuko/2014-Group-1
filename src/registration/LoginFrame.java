@@ -58,6 +58,7 @@ public class LoginFrame {
 	 */
 	public LoginFrame() {
 		initialize();
+		frame.setVisible(true);
 	}
 
 	/**
