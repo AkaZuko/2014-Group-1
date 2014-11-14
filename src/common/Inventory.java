@@ -9,6 +9,7 @@ import java.sql.Statement;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
+@SuppressWarnings("unused")
 public class Inventory {
 
 	public Object viewInventory(){

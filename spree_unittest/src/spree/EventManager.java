@@ -2,7 +2,7 @@ package spree;
 
 public class EventManager implements EventManagerInt {
 
-	String name=null;
+	 String name=null;
 	Game game=null;
 	EventManager eh;
 	InventoryInt i;
@@ -13,7 +13,10 @@ public class EventManager implements EventManagerInt {
 	DashboardFrameInt d;
 	ViewResultsFrameInt v;
 	
-	
+	public String getName(){
+		return this.name;
+		
+	}
 	public void setSendMessageFrame(SendMessageFrameInt a){
 		this.s1=a;
 		
@@ -37,5 +40,11 @@ public class EventManager implements EventManagerInt {
 		s2.getSchedule();
 		
 	}
+	public void setName(String string) {
+		this.name=string;
+		
+		
+	}
+	
 	
 }
