@@ -1,44 +1,81 @@
 package participant;
 
-import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
 
-import javax.swing.JFrame;
+public class ParticipantProfileFrame extends JFrame {
 
-public class ParticipantProfileFrame {
+	private String id;
 
-	private JFrame frame;
+	// Create and set up the window.
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+	public ParticipantProfileFrame(final String id) {
+		this.id = id;
+
+		final Participant par = new Participant(id);
+		setTitle("Participant Profile");
+		getContentPane().setLayout(null);
+		setBounds(100, 100, 450, 300);
+
+		JButton btnNewButton_1 = new JButton("Update Profile");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
 				try {
-					ParticipantProfileFrame window = new ParticipantProfileFrame("");
-					window.frame.setVisible(true);
-				} catch (Exception e) {
+					par.updateProfile();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				dispose();
 			}
 		});
+
+		btnNewButton_1.setBounds(48, 26, 147, 57);
+		getContentPane().add(btnNewButton_1);
+
+		JButton btnNewButton_2 = new JButton("Register an Event");
+		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				par.doEventRegPar();
+				dispose();
+			}
+		});
+		btnNewButton_2.setBounds(48, 104, 147, 57);
+		getContentPane().add(btnNewButton_2);
+
+		JButton btnNewButton = new JButton("View Dashboard");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				par.displayDash();
+				// dashFrame.setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton.setBounds(48, 177, 147, 57);
+		getContentPane().add(btnNewButton);
+		final JPanel panel = new JPanel();
+
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public ParticipantProfileFrame(String ID) {
-		initialize();
-		frame.setVisible(true);
-	}
+	public static void main(String[] args) {
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		final String id= "a";
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				createAndShowGUI();
+
+			}
+
+			private void createAndShowGUI() {
+
+				ParticipantProfileFrame ex = new ParticipantProfileFrame(id);
+				ex.setVisible(true);
+			}
+		});
+
 	}
 
 }
