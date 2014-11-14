@@ -7,12 +7,20 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import common.AccData;
+
 public class RegisterationDetailFrame {
 
+	private AccData account;
 	private JFrame frame;
 	private JTextField txtNamefield;
 	private JTextField txtPassfield;
@@ -48,6 +56,7 @@ public class RegisterationDetailFrame {
 	 */
 	public RegisterationDetailFrame() {
 		initialize();
+		frame.setVisible(true);
 	}
 
 	/**
@@ -147,8 +156,28 @@ public class RegisterationDetailFrame {
 	class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource().equals(btnRegister)){
-				
-				if(validate()) System.out.println("it works!");
+				//sequence : name id pass email address age inst
+				if(validate()) {
+					try {
+						Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+						Statement s = conn.createStatement();
+						String query1 = "SELECT * FROM participantdata";
+						ResultSet rs1 = s.executeQuery(query1);
+						rs1.last();
+					    int size = rs1.getRow();
+					    int idno = size+1;
+					    rs1.beforeFirst();
+						System.out.println(rs1.toString());
+						String query2 = "INSERT INTO participantdata VALUES(" + "\"" + txtNamefield.getText() + "\"," + "\"P_" +  Integer.toString(idno) + "\"," + "\"" + txtPassfield.getText() + "\"," + "\"" + txtEmailfield.getText() +  "\"," + Integer.parseInt(txtAgefield.getText()) +  "," + "\"" + txtInstfield.getText() + "\"" +  ");";
+						ResultSet rs2 = s.executeQuery(query2);
+												
+						rs1.close();
+						s.close();
+						conn.close();
+					} catch (SQLException e1) {
+						System.out.println(e1.toString());
+					}
+				}
 				//frame.setVisible(false);
 							
 			}
@@ -168,7 +197,7 @@ public class RegisterationDetailFrame {
 				else label4.setText("");
 				
 				if(!txtInstfield.getText().matches("([a-zA-Z ^0-9]){1,}")) label5.setText("*");
-				label5.setText("");
+				else label5.setText("");
 				
 				if(txtNamefield.getText().matches("([a-zA-Z]){1,} ([a-zA-Z]){1,}") && txtEmailfield.getText().matches("^[\\w-]+(?:\\.[\\w-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7}$") && txtInstfield.getText().matches("([a-zA-Z ^0-9]){1,}") && (txtPassfield.getText().isEmpty() || txtPassfield.getText().getBytes().length<6) && txtAgefield.getText().matches("[1-9][0-9]?[0-9]?")) return true;
 				else return false;

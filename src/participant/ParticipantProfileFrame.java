@@ -15,7 +15,7 @@ public class ParticipantProfileFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ParticipantProfileFrame window = new ParticipantProfileFrame();
+					ParticipantProfileFrame window = new ParticipantProfileFrame("");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -27,8 +27,9 @@ public class ParticipantProfileFrame {
 	/**
 	 * Create the application.
 	 */
-	public ParticipantProfileFrame() {
+	public ParticipantProfileFrame(String ID) {
 		initialize();
+		frame.setVisible(true);
 	}
 
 	/**

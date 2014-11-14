@@ -14,17 +14,20 @@ public class Registeration {
 	String ID;
 	AccData account;
 	
-	public static Boolean validateData(char[] password, String ID){
-		Boolean status = false;
+	public static Boolean validateData(String password, String ID){
+		
 		
 		try{
 		Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
 		Statement s = conn.createStatement();
 		String query = "Select ID,Password from logindata";
 		ResultSet rs = s.executeQuery(query);
-		String pass  = password.toString();
+		
 		while(rs.next()){
-		if(pass.equalsIgnoreCase(rs.getString("Password")) && ID.equalsIgnoreCase(rs.getString("ID"))){
+			System.out.println(rs.getString("Password")+rs.getString("ID"));
+			System.out.println(password+ID);
+		if(password.equals(rs.getString("Password")) && ID.equals(rs.getString("ID"))){
+			System.out.println("VALIDATING!");
 			return true;
 		}
 		}
@@ -32,7 +35,7 @@ public class Registeration {
 		}catch(SQLException e){
 			System.out.println(e.toString());
 		}
-		return status;
+		return false;
 	}
 	
 	public Boolean submitData(){
@@ -44,8 +47,7 @@ public class Registeration {
 	}
 	
 	public String returnLoginID(){
-		
-		return this.ID;
+			return this.ID;
 	}
 
 }

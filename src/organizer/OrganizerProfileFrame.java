@@ -5,17 +5,16 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextPane;
-
 
 public class OrganizerProfileFrame {
 
 	private JFrame frame;
 	private JButton btnUpdate;
+	Convenor convenor = null;
+	EventHead eventHead = null;
 
 	/**
 	 * Launch the application.
@@ -24,7 +23,7 @@ public class OrganizerProfileFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OrganizerProfileFrame window = new OrganizerProfileFrame();
+					OrganizerProfileFrame window = new OrganizerProfileFrame("");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,8 +35,10 @@ public class OrganizerProfileFrame {
 	/**
 	 * Create the application.
 	 */
-	public OrganizerProfileFrame() {
+	public OrganizerProfileFrame(String ID) {
+		//instantiates the user based upon ID
 		initialize();
+		frame.setVisible(true);
 	}
 
 	/**

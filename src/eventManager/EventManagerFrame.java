@@ -23,7 +23,7 @@ public class EventManagerFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EventManagerFrame window = new EventManagerFrame();
+					EventManagerFrame window = new EventManagerFrame("");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,8 +35,9 @@ public class EventManagerFrame {
 	/**
 	 * Create the application.
 	 */
-	public EventManagerFrame() {
+	public EventManagerFrame(String ID) {
 		initialize();
+		frame.setVisible(true);
 	}
 
 	/**

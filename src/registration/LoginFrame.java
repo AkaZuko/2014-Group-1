@@ -1,20 +1,25 @@
 package registration;
-import common.AccData;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JFormattedTextField;
 
+
+import eventManager.EventManagerFrame;
+
+
+import organizer.OrganizerProfileFrame;
+
+import participant.ParticipantProfileFrame;
+
 public class LoginFrame {
-	private AccData acc;
+
 	private JFrame frame;
 	private JPasswordField passwordField;
 	private JLabel lblSpree;
@@ -25,9 +30,13 @@ public class LoginFrame {
 	private JFormattedTextField formattedTextField;
 	private JLabel lblNewLabel;
 	JLabel lblStatus;
-
+	
+	OrganizerProfileFrame organizer = null;
+	ParticipantProfileFrame participant = null;
+	EventManagerFrame EM = null;
+	
 	private String ID;
-	private char[] password;
+	private String password;
 	/**
 	 * Launch the application.
 	 */
@@ -73,17 +82,17 @@ public class LoginFrame {
 		lblpasswd.setBounds(74, 101, 89, 15);
 		frame.getContentPane().add(lblpasswd);
 		
-		Handler handle = new Handler();
+		Handler handle1 = new Handler();
 		btnLogin = new JButton("LogIn");
 		btnLogin.setBounds(157, 137, 142, 34);
 		frame.getContentPane().add(btnLogin);
-		btnLogin.addActionListener(handle);
+		btnLogin.addActionListener(handle1);
 		
 		btnregister = new JButton("Register");
 		btnregister.setBounds(292, 226, 127, 25);
 		frame.getContentPane().add(btnregister);
-		
-		btnregister.addActionListener(handle);
+		Handler handle2 = new Handler();
+		btnregister.addActionListener(handle2);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(180, 96, 163, 25);
@@ -98,7 +107,7 @@ public class LoginFrame {
 		frame.getContentPane().add(lblNewLabel);
 		
 		lblStatus = new JLabel("");
-		lblStatus.setBounds(204, 193, 46, 14);
+		lblStatus.setBounds(146, 201, 171, 14);
 		frame.getContentPane().add(lblStatus);
 	}
 	
@@ -110,10 +119,23 @@ public class LoginFrame {
 				frame = null;				
 			}
 			if(e.getSource().equals(btnLogin)){
-				password = passwordField.getPassword();
+				password = new String(passwordField.getPassword());
 				ID = formattedTextField.getText();
-				if(Registeration.validateData(password, ID)) {
+				Boolean result = Registeration.validateData(password, ID);
+				System.out.println(result);
+				if(result) {
 					//ProfileFrame is displayed based upon the type of user
+					if(ID.charAt(0) == 'C' || ID.charAt(1) == 'H' ){
+						organizer = new OrganizerProfileFrame(ID);
+					}
+					if(ID.charAt(1) == 'M'){
+						EM = new EventManagerFrame(ID);
+					}
+					if(ID.charAt(0) == 'P'){
+						participant = new ParticipantProfileFrame(ID);
+					}
+					frame.setVisible(false);
+					frame = null;
 					
 				}
 				else{
