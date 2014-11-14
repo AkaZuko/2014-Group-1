@@ -2,7 +2,7 @@ package spree;
 
 public interface EventManagerInt {
 	String name=null;
-	Game game=null;
+	//Game game=null;
 	
     void viewInventoryRequest();
 	boolean setResult();

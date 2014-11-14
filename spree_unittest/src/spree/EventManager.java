@@ -3,7 +3,7 @@ package spree;
 public class EventManager implements EventManagerInt {
 
 	 String name=null;
-	Game game=null;
+	//Game game=null;
 	EventManager eh;
 	InventoryInt i;
 	SubmitResultFrameInt s;

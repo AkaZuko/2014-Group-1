@@ -9,15 +9,21 @@ import common.AccData;
 public class Department {
 
 	AccData acc;
-
+	File file;
+	FileReader fr;
 	
-	public String viewLog() throws IOException{
-		File file =new File("LogFile");
-	      file.createNewFile();
+	
+	public Department() throws IOException{
+		file =new File("res/LogFile");
+	    file.createNewFile();
+	    fr = new FileReader(file); 
 	      
-	      //FileWriter writer = new FileWriter(file); 
+	}
+	public String viewLog() throws IOException{
+		
+	      
 	      String outp =null;
-	      FileReader fr = new FileReader(file); 
+	     
 	      char [] a = new char[50];
 	      while(fr.read(a)!=-1){
 	    	    // reads the content to the array
