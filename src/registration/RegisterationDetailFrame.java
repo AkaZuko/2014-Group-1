@@ -16,12 +16,14 @@ import java.sql.Statement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import participant.ParticipantProfileFrame;
+
 import common.AccData;
 
 public class RegisterationDetailFrame {
 
-	private AccData account;
-	private JFrame frame;
+
+	public JFrame frame;
 	private JTextField txtNamefield;
 	private JTextField txtPassfield;
 	private JTextField txtAgefield;
@@ -167,10 +169,14 @@ public class RegisterationDetailFrame {
 					    int size = rs1.getRow();
 					    int idno = size+1;
 					    rs1.beforeFirst();
-						System.out.println(rs1.toString());
-						String query2 = "INSERT INTO participantdata VALUES(" + "\"" + txtNamefield.getText() + "\"," + "\"P_" +  Integer.toString(idno) + "\"," + "\"" + txtPassfield.getText() + "\"," + "\"" + txtEmailfield.getText() +  "\"," + Integer.parseInt(txtAgefield.getText()) +  "," + "\"" + txtInstfield.getText() + "\"" +  ");";
-						ResultSet rs2 = s.executeQuery(query2);
-												
+						
+						String ID = "P_" + Integer.toString(idno);
+						
+						if(Registeration.submitData(txtNamefield.getText(), Integer.toString(idno), txtPassfield.getText(), txtEmailfield.getText(), txtAgefield.getText(), txtInstfield.getText())){
+							ParticipantProfileFrame participant = new ParticipantProfileFrame(ID);
+							participant.setVisible(true);
+							frame.setVisible(false);
+						}
 						rs1.close();
 						s.close();
 						conn.close();
@@ -183,6 +189,7 @@ public class RegisterationDetailFrame {
 			}
 		}
 			private Boolean validate(){
+				Boolean status = false;
 					
 				if(!txtNamefield.getText().matches("([a-zA-Z]){1,} ([a-zA-Z]){1,}")) label1.setText("*");
 				else label1.setText("");	
@@ -199,8 +206,10 @@ public class RegisterationDetailFrame {
 				if(!txtInstfield.getText().matches("([a-zA-Z ^0-9]){1,}")) label5.setText("*");
 				else label5.setText("");
 				
-				if(txtNamefield.getText().matches("([a-zA-Z]){1,} ([a-zA-Z]){1,}") && txtEmailfield.getText().matches("^[\\w-]+(?:\\.[\\w-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7}$") && txtInstfield.getText().matches("([a-zA-Z ^0-9]){1,}") && (txtPassfield.getText().isEmpty() || txtPassfield.getText().getBytes().length<6) && txtAgefield.getText().matches("[1-9][0-9]?[0-9]?")) return true;
-				else return false;
+				//if(txtNamefield.getText().matches("([a-zA-Z]){1,} ([a-zA-Z]){1,}") && txtEmailfield.getText().matches("^[\\w-]+(?:\\.[\\w-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7}$") && txtInstfield.getText().matches("([a-zA-Z ^0-9]){1,}") && (txtPassfield.getText().isEmpty() || txtPassfield.getText().getBytes().length<6) && txtAgefield.getText().matches("[1-9][0-9]?[0-9]?")) return status =true;
+				if(label1.getText().equals("") && label2.getText().equals("") && label3.getText().equals("")  && label4.getText().equals("") && label5.getText().equals("")) status = true;
+				if(status) System.out.println("validation starts");
+				return status;
 
 			}
 	}
