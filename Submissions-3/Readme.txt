@@ -2,6 +2,9 @@ Submission 3:
 
 //Use ./src folder to run the classes.
 
+//MySQL is used for database management.
+//Every other external jar file is provided in ./lib folder.
+
 Classes complete:
 Location: ./Submissions-3/src
 Package complete;
