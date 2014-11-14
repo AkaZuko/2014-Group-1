@@ -7,13 +7,23 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import participant.ParticipantProfileFrame;
+
+import common.AccData;
+
 public class RegisterationDetailFrame {
 
-	private JFrame frame;
+
+	public JFrame frame;
 	private JTextField txtNamefield;
 	private JTextField txtPassfield;
 	private JTextField txtAgefield;
@@ -48,6 +58,7 @@ public class RegisterationDetailFrame {
 	 */
 	public RegisterationDetailFrame() {
 		initialize();
+		frame.setVisible(true);
 	}
 
 	/**
@@ -147,13 +158,38 @@ public class RegisterationDetailFrame {
 	class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource().equals(btnRegister)){
-				
-				if(validate()) System.out.println("it works!");
+				//sequence : name id pass email address age inst
+				if(validate()) {
+					try {
+						Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+						Statement s = conn.createStatement();
+						String query1 = "SELECT * FROM participantdata";
+						ResultSet rs1 = s.executeQuery(query1);
+						rs1.last();
+					    int size = rs1.getRow();
+					    int idno = size+1;
+					    rs1.beforeFirst();
+						
+						String ID = "P_" + Integer.toString(idno);
+						
+						if(Registeration.submitData(txtNamefield.getText(), Integer.toString(idno), txtPassfield.getText(), txtEmailfield.getText(), txtAgefield.getText(), txtInstfield.getText())){
+							ParticipantProfileFrame participant = new ParticipantProfileFrame(ID);
+							participant.setVisible(true);
+							frame.setVisible(false);
+						}
+						rs1.close();
+						s.close();
+						conn.close();
+					} catch (SQLException e1) {
+						System.out.println(e1.toString());
+					}
+				}
 				//frame.setVisible(false);
 							
 			}
 		}
 			private Boolean validate(){
+				Boolean status = false;
 					
 				if(!txtNamefield.getText().matches("([a-zA-Z]){1,} ([a-zA-Z]){1,}")) label1.setText("*");
 				else label1.setText("");	
@@ -168,10 +204,12 @@ public class RegisterationDetailFrame {
 				else label4.setText("");
 				
 				if(!txtInstfield.getText().matches("([a-zA-Z ^0-9]){1,}")) label5.setText("*");
-				label5.setText("");
+				else label5.setText("");
 				
-				if(txtNamefield.getText().matches("([a-zA-Z]){1,} ([a-zA-Z]){1,}") && txtEmailfield.getText().matches("^[\\w-]+(?:\\.[\\w-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7}$") && txtInstfield.getText().matches("([a-zA-Z ^0-9]){1,}") && (txtPassfield.getText().isEmpty() || txtPassfield.getText().getBytes().length<6) && txtAgefield.getText().matches("[1-9][0-9]?[0-9]?")) return true;
-				else return false;
+				//if(txtNamefield.getText().matches("([a-zA-Z]){1,} ([a-zA-Z]){1,}") && txtEmailfield.getText().matches("^[\\w-]+(?:\\.[\\w-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7}$") && txtInstfield.getText().matches("([a-zA-Z ^0-9]){1,}") && (txtPassfield.getText().isEmpty() || txtPassfield.getText().getBytes().length<6) && txtAgefield.getText().matches("[1-9][0-9]?[0-9]?")) return status =true;
+				if(label1.getText().equals("") && label2.getText().equals("") && label3.getText().equals("")  && label4.getText().equals("") && label5.getText().equals("")) status = true;
+				if(status) System.out.println("validation starts");
+				return status;
 
 			}
 	}

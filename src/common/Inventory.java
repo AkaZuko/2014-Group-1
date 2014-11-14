@@ -6,10 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+
 import javax.swing.JLabel;
 import javax.swing.JTable;
 
-@SuppressWarnings("unused")
+
 public class Inventory {
 
 	public Object viewInventory(){
@@ -33,12 +34,10 @@ public class Inventory {
 				++i;
 			}
 			
-			
 			rs.close();
 			s.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			System.out.println(e.toString());
 		}
 		return data;

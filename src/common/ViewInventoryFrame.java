@@ -24,6 +24,7 @@ public class ViewInventoryFrame {
 	private JLabel lblNoofitems;
 	private JLabel lblLastmodified;
 
+
 	/**
 	 * Launch the application.
 	 */
