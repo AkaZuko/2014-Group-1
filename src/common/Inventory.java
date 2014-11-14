@@ -6,6 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+<<<<<<< HEAD
+=======
+import javax.swing.JLabel;
+import javax.swing.JTable;
+
+@SuppressWarnings("unused")
+>>>>>>> origin/master
 public class Inventory {
 
 	public Object viewInventory(){
