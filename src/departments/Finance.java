@@ -30,7 +30,7 @@ public class Finance extends Department {
 		Connection conn = DriverManager.getConnection(AccData.getHost(),
 				"root", "12345");
 		Statement s = conn.createStatement();
-		String query = "Select * from Finance";
+		String query = "Select * from Finance;";
 		ResultSet rs = s.executeQuery(query);
 
 		int i = 0;
@@ -72,7 +72,7 @@ public class Finance extends Department {
 		Connection conn = DriverManager.getConnection(AccData.getHost(),
 				"root", "12345");
 		Statement s = conn.createStatement();
-		String query = "SELECT * FROM Finance";
+		String query = "SELECT * FROM Finance;";
 		ResultSet rs = s.executeQuery(query);
 		while (rs.next()) {
 			total_amount = (int) rs.getInt("CashInFlow");
@@ -85,7 +85,7 @@ public class Finance extends Department {
 		java.sql.Time sqlTime = new java.sql.Time(utilDate.getTime());
 
 		String query2 = "insert into Finance values ('" + sqlDate + "','"
-				+ total_amount + "','" + sqlTime + "')";
+				+ total_amount + "','" + sqlTime + "');";
 		boolean rs2 = s.execute(query2);
 
 	}

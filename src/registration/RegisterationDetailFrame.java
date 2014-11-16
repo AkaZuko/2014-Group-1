@@ -36,6 +36,7 @@ public class RegisterationDetailFrame {
 	JLabel label5 ;
 	JLabel label6 ;
 	JButton btnRegister ;
+	private JButton btnBack;
 
 	/**
 	 * Launch the application.
@@ -153,6 +154,16 @@ public class RegisterationDetailFrame {
 		JLabel lblPassInst = new JLabel("*Password must be of 6 or more characters");
 		lblPassInst.setBounds(20, 231, 266, 14);
 		frame.getContentPane().add(lblPassInst);
+		
+		btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LoginFrame login = new LoginFrame();
+				frame.dispose();
+			}
+		});
+		btnBack.setBounds(10, 13, 89, 23);
+		frame.getContentPane().add(btnBack);
 	}
 	
 	class Handler implements ActionListener {
