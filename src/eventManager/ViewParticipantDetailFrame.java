@@ -3,31 +3,28 @@ package eventManager;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JButton;
 
-public class ViewParticipantDetailFrame {
+import registration.RegisterationDetailFrame;
 
-	private JFrame frame;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
+/*
+ * @author monalika
+ */
+
+public class ViewParticipantDetailFrame extends JFrame{
+
+//	private JFrame frame;
+	String ID;
 	/**
 	 * Launch the application.
+	 the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ViewParticipantDetailFrame window = new ViewParticipantDetailFrame();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public ViewParticipantDetailFrame() {
+	public ViewParticipantDetailFrame(String id) {
+		this.ID = id;
 		initialize();
 	}
 
@@ -35,9 +32,27 @@ public class ViewParticipantDetailFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+		this.setBounds(100, 100, 450, 300);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
+		
+		JLabel lblParticipantDetails = new JLabel("Participant Details");
+		lblParticipantDetails.setBounds(142, 30, 205, 29);
+		getContentPane().add(lblParticipantDetails);
+		
+		JButton btnEmHome = new JButton("EM Home");
+		btnEmHome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EventManagerFrame fr = new EventManagerFrame(ID);
+				setVisible(false);
+				
+			}
+		});
+		btnEmHome.setBounds(158, 193, 117, 25);
+		getContentPane().add(btnEmHome);
 	}
+	
+	
 
 }

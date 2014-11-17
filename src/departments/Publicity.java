@@ -6,6 +6,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.CharBuffer;
 
+
+/**
+* <h1>Publicity</h1>
+* This class defines the functionality of the Publicity department.<p>
+* 
+* @author  Group_1 spree
+* @version 1.0
+*/
+
+
+
 public class Publicity extends Department {
 
 	public Publicity() throws IOException {
@@ -13,6 +24,15 @@ public class Publicity extends Department {
 
 	}
 
+	/**
+	   * This is the getDetail() method which returns the details of members of the 
+	   * Publicity department
+	   * @param none
+	   * @return String[]  the returned value is of an array of member names
+	   * @exception IO Exception On file manipulation error.
+	   * @see IO Exception
+	   */
+	
 	public String[] getDetails() throws IOException {
 
 		File pub = new File("res/Publicity");
@@ -28,7 +48,7 @@ public class Publicity extends Department {
 			i++;
 
 		}
-
+		br.close();
 		return details;
 
 	}

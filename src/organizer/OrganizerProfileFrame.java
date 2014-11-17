@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import registration.LoginFrame;
+
 public class OrganizerProfileFrame {
 
 	private JFrame frame;
@@ -97,6 +99,16 @@ public class OrganizerProfileFrame {
 		textInstName.setBounds(223, 117, 200, 44);
 		frame.getContentPane().add(textInstName);
 		textInstName.setText("BITS PILANI KK BIRLA GOA Campus");
+		
+		JButton btnLogOut = new JButton("Log out");
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LoginFrame login = new LoginFrame();
+				frame.dispose();
+			}
+		});
+		btnLogOut.setBounds(22, 18, 89, 23);
+		frame.getContentPane().add(btnLogOut);
 	}
 	
 	class Handler implements ActionListener {

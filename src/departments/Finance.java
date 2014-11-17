@@ -13,6 +13,15 @@ import java.sql.Statement;
 
 import common.AccData;
 
+
+/**
+* <h1>Finance</h1>
+* This class defines the functionality of the Finance department.<p>
+* 
+* @author  Group_1 spree
+* @version 1.0
+*/
+
 public class Finance extends Department {
 
 	private static int total_amount;
@@ -23,9 +32,22 @@ public class Finance extends Department {
 		super();
 
 	}
+	
+	
+	
 
 	private static int totalAmount = 0;
-
+	
+	
+	/**
+	   * This is the getFinance() method which returns the details of the date and time of Cash in flow , 
+	   * and total amount after every such transcation.
+	   * @param none
+	   * @return Object[][]  the returned value is date,cash and time values
+	   * @exception SQL Exception On database error.
+	   * @see SQL Exception
+	   */
+	
 	public Object[][] getFinanceDetails() throws SQLException {
 		Connection conn = DriverManager.getConnection(AccData.getHost(),
 				"root", "12345");
@@ -38,7 +60,7 @@ public class Finance extends Department {
 
 			data[i][0] = (String) rs.getString("Date");
 			data[i][1] = (String) rs.getString("CashInFlow");
-
+			data[i][2] = (String) rs.getString("Time");
 			++i;
 
 		}
@@ -46,6 +68,16 @@ public class Finance extends Department {
 		return data;
 
 	}
+	
+	
+	/**
+	   * This is the getDetail() method which returns the details of members of the 
+	   * Finance department
+	   * @param none
+	   * @return String[]  the returned value is of an array of member names
+	   * @exception IO Exception On file manipulation error.
+	   * @see IO Exception
+	   */
 
 	public String[] getDetails() throws IOException {
 
@@ -67,6 +99,16 @@ public class Finance extends Department {
 
 	}
 
+	
+	/**
+	   * This is the addPayment() method which updates the Finance table
+	   * whenever a student registers
+	   * @param none
+	   * @return void  the returned value is void
+	   * @exception SQL Exception On database error.
+	   * @see SQL Exception
+	   */
+	
 	public void addPayment() throws SQLException {
 
 		Connection conn = DriverManager.getConnection(AccData.getHost(),

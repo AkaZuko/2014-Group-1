@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import common.DashboardFrame;
 
 import registration.EventRegisterationFrame;
+import registration.LoginFrame;
 
 import java.awt.Font;
 import java.io.BufferedReader;
@@ -109,6 +110,16 @@ public class ParticipantProfileFrame extends JFrame {
 		JLabel lblInstdisp = new JLabel(par.getInstitution());
 		lblInstdisp.setBounds(180, 135, 169, 14);
 		getContentPane().add(lblInstdisp);
+		
+		JButton btnLogOut = new JButton("Log Out");
+		btnLogOut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LoginFrame login = new LoginFrame();
+				dispose();
+			}
+		});
+		btnLogOut.setBounds(36, 20, 89, 23);
+		getContentPane().add(btnLogOut);
 		final JPanel panel = new JPanel();
 
 	}

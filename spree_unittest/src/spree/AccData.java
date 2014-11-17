@@ -2,7 +2,7 @@ package spree;
 
 public interface AccData {
 
-	Admin admin=null;
+	Admin1 admin=null;
 	
 	void viewDepartmentDetails();
 	int  viewFinances();

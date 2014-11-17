@@ -1,7 +1,7 @@
 package spree;
 
 
-public class Admin {
+public class Admin1 {
 	
 	public LogInInt ai1 = null;
 	public AccDataInt ai2 = null;

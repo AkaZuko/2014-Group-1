@@ -22,7 +22,7 @@ public class AdminTest extends TestCase {
 	
 	public LogInInt ai1 = null;
 	
-	private Admin ad = null;
+	private Admin1 ad = null;
 	
 	public AccDataInt ai2 = null;
 	public boolean True, False;
@@ -32,7 +32,7 @@ public class AdminTest extends TestCase {
 	    // unimplemented methods
 	    ai1 = createNiceMock(LogInInt.class);
 	    ai2 = createNiceMock(AccDataInt.class);
-	    ad = new Admin();
+	    ad = new Admin1();
 	  }
 	
 	 @Test

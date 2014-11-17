@@ -1,4 +1,13 @@
 package departments;
+/**
+* The Department class program provides a framework for the specific Departments  
+* that is Accomodation , Finance and Publicity.
+*
+*
+* @author  Group 1_ spree 
+* @version 1.0
+* 
+*/
 
 import java.io.File;
 import java.io.FileReader;
@@ -19,6 +28,15 @@ public class Department {
 	    fr = new FileReader(file); 
 	      
 	}
+	
+	
+	/**
+	   * This is the viewLog() method which reads the log file.
+	   * @param none
+	   * @return String  the returned value is the contents of the log file
+	   * @exception IOException On file IO error.
+	   * @see IOException
+	   */
 	public String viewLog() throws IOException{
 		
 	      
