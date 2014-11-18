@@ -53,7 +53,7 @@ public class SendMessageFrame extends JFrame {
 			//to store all the lines
 			x[i] = line;
 			i++;
-	        System.out.println(line);
+	        //System.out.println(line);
 	        
 	    }
 		

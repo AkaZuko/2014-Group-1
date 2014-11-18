@@ -57,7 +57,7 @@ public class Participant {
 
 	public void doEventRegPar() {
 
-		EventRegisterationFrame eveFrame = new EventRegisterationFrame();// Add attributes to the constructor
+		EventRegisterationFrame eveFrame = new EventRegisterationFrame(id,institution);// Add attributes to the constructor
 		// eveFrame.setVisible(true);
 	}
 
