@@ -15,15 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import registration.LoginFrame;
-<<<<<<< HEAD
-
-public class OrganizerProfileFrame {
-=======
 import eventManager.*;
 
 import common.AccData;
 import common.DashboardFrame;
->>>>>>> 46e36bc07dfa58f987b3d659ada8446ea5918746
 
 
 public class OrganizerProfileFrame extends JFrame{
@@ -151,29 +146,11 @@ public class OrganizerProfileFrame extends JFrame{
 		this.getContentPane().add(textInstName);
 		textInstName.setText("BITS PILANI KK BIRLA GOA Campus");
 		
-<<<<<<< HEAD
-		JButton btnLogOut = new JButton("Log out");
-		btnLogOut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				LoginFrame login = new LoginFrame();
-				frame.dispose();
-			}
-		});
-		btnLogOut.setBounds(22, 18, 89, 23);
-		frame.getContentPane().add(btnLogOut);
-	}
-	
-	class Handler implements ActionListener {
-		public void actionPerformed(ActionEvent e){
-			if(e.getSource().equals(btnUpdate)){
-							
-=======
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				LoginFrame login = new LoginFrame();
 				dispose();
->>>>>>> 46e36bc07dfa58f987b3d659ada8446ea5918746
 			}
 		});
 		btnLogOut.setBounds(10, 18, 89, 23);
