@@ -112,7 +112,7 @@ public class Finance extends Department {
 	public void addPayment() throws SQLException {
 
 		Connection conn = DriverManager.getConnection(AccData.getHost(),
-				"root", "12345");
+				AccData.getUser(), AccData.getPass());
 		Statement s = conn.createStatement();
 		String query = "SELECT * FROM Finance;";
 		ResultSet rs = s.executeQuery(query);

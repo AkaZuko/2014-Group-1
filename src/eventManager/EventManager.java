@@ -34,13 +34,7 @@ public class EventManager {
 		      
 		      Class.forName("com.mysql.jdbc.Driver");
 
-		      
-		      System.out.println("Connecting to a selected database...");
-		      conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
-		      System.out.println("Connected database successfully...");
-		      
-		      
-		      System.out.println("Creating statement...");
+		      conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 		      stmt = conn.createStatement();
 
 		      String sql = "SELECT * FROM emdata";

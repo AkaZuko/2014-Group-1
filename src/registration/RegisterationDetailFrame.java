@@ -19,10 +19,11 @@ import javax.swing.JButton;
 import participant.ParticipantProfileFrame;
 
 import common.AccData;
+import common.Admin;
 
 public class RegisterationDetailFrame {
 
-
+	private Admin admin;
 	public JFrame frame;
 	private JTextField txtNamefield;
 	private JTextField txtPassfield;
@@ -58,6 +59,7 @@ public class RegisterationDetailFrame {
 	 * Create the application.
 	 */
 	public RegisterationDetailFrame() {
+		admin = new Admin("","");
 		initialize();
 		frame.setVisible(true);
 	}
@@ -169,10 +171,10 @@ public class RegisterationDetailFrame {
 	class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource().equals(btnRegister)){
-				//sequence : name id pass email address age inst
+				//sequence : name id pass email address age institute
 				if(validate()) {
 					try {
-						Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+						Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 						Statement s = conn.createStatement();
 						String query1 = "SELECT * FROM participantdata";
 						ResultSet rs1 = s.executeQuery(query1);
@@ -191,6 +193,8 @@ public class RegisterationDetailFrame {
 						rs1.close();
 						s.close();
 						conn.close();
+						admin.updateTotalRegisterations();
+						
 					} catch (SQLException e1) {
 						System.out.println(e1.toString());
 					}

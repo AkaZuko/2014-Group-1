@@ -17,7 +17,7 @@ public class EventHead implements  OrganizingCommitte {
 	public EventHead(String ID){
 		Statement stmt=null;
 		try{
-			Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+			Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 			stmt=conn.createStatement();
 			String query = "Select * from organizerdata;";
 			ResultSet rs = stmt.executeQuery(query);

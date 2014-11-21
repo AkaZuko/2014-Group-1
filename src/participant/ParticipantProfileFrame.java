@@ -19,6 +19,10 @@ import javax.swing.JLabel;
 
 public class ParticipantProfileFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String ID;
 	private Participant par; 
 	

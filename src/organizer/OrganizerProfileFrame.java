@@ -46,7 +46,7 @@ public class OrganizerProfileFrame extends JFrame{
 		
 			
 		try{
-			Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+			Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 			Statement s1 = conn.createStatement();
 			String query1 = "Select ID from organizerdata;";
 			ResultSet rs1 = s1.executeQuery(query1);

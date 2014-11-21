@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JFormattedTextField;
 
+import common.Admin;
+
 
 import eventManager.EventManagerFrame;
 
@@ -19,7 +21,7 @@ import organizer.OrganizerProfileFrame;
 import participant.ParticipantProfileFrame;
 
 public class LoginFrame {
-
+	private Admin admin;
 	private JFrame frame;
 	private JPasswordField passwordField;
 	private JLabel lblSpree;
@@ -57,6 +59,7 @@ public class LoginFrame {
 	 * Create the application.
 	 */
 	public LoginFrame() {
+		admin = new Admin(ID,password);
 		initialize();
 		frame.setVisible(true);
 	}
@@ -112,17 +115,21 @@ public class LoginFrame {
 		frame.getContentPane().add(lblStatus);
 	}
 	
+	private void createUser(){
+		RegisterationDetailFrame win = new RegisterationDetailFrame();
+		frame.setVisible(false);
+		frame = null;
+	}
+	
 	class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource().equals(btnregister)){
-				RegisterationDetailFrame win = new RegisterationDetailFrame();
-				frame.setVisible(false);
-				frame = null;				
+				createUser();				
 			}
 			if(e.getSource().equals(btnLogin)){
 				password = new String(passwordField.getPassword());
 				ID = formattedTextField.getText();
-				Boolean result = Registeration.validateData(password, ID);
+				Boolean result = admin.authenticateLogin(ID, password);
 				System.out.println(result);
 				if(result) {
 					//ProfileFrame is displayed based upon the type of user

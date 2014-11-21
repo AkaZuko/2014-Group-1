@@ -10,6 +10,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,8 +22,10 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
+import common.AccData;
+
 /*
- * @author monalika
+ * @author Spree_Group 1
  */
 
 public class SendMessageFrame extends JFrame {
@@ -40,8 +47,9 @@ public class SendMessageFrame extends JFrame {
 	
 	public void init(){
 		
-		 int i =0;
-		 String[] x = new String[50];
+		
+		 //int i =0;
+		 /*String[] x = new String[50];
 		
 		try{
 			FileReader inputFile = new FileReader("\\Group-1\\res\\message.txt");
@@ -65,7 +73,7 @@ public class SendMessageFrame extends JFrame {
 	            + e.getMessage());                      
 	    }
 		 
-		 
+		*/ 
 		
 		this.setBounds(100, 100, 450, 400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,46 +128,19 @@ public class SendMessageFrame extends JFrame {
 		JButton btnShowRecentMessages = new JButton("Show Recent Messages");
 		btnShowRecentMessages.setBounds(33, 146, 218, 25);
 		
+		String message = "";
+		try{
+			Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
+			Statement s = conn.createStatement();
+			String query = "Select Count from messagecount;";
+			ResultSet rs = s.executeQuery(query);
+			int count = rs.getInt("Count");
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
 		
 		
-		String message = "   ";
-		int p=i;
-	
-		if(p>7){
-			message = x[i-1]+'\n'+x[i-2]+'\n'+x[i-3]+'\n'+x[i-4]+'\n'+x[i-5]+x[i-6]+'\n'+x[i-7] + '\n' + x[i-8];
-		}
-		else if (p==7){
-			message = x[i-1]+'\n'+x[i-2]+'\n'+x[i-3]+'\n'+x[i-4]+'\n'+x[i-5]+x[i-6]+'\n'+x[i-7];
-
-		}
-		else if(p==6){
-			message = x[i-1]+'\n'+x[i-2]+'\n'+x[i-3]+'\n'+x[i-4]+'\n'+x[i-5]+x[i-6];
-
-		}
-		else if(p==5){
-			message = x[i-1]+'\n'+x[i-2]+'\n'+x[i-3]+'\n'+x[i-4]+'\n'+x[i-5];
-
-		}
-		else if(p==4){
-			message = x[i-1]+'\n'+x[i-2]+'\n'+x[i-3]+'\n'+x[i-4];
-
-		}
-		else if(p==3){
-			message = x[i-1]+'\n'+x[i-2]+'\n'+x[i-3];
-
-		}
-		else if(p==2){
-			message = x[i-1] + '\n' + x[i-2];
-
-		}
-		else if(p==1){
-			message = x[i-1];
-
-		}
-		else if(p<1){
-			message = " ";
-
-		}
 		
 		JTextArea textArea = new JTextArea(message);
 		textArea.setBounds(45, 161, 374, 150);

@@ -16,7 +16,7 @@ public class Inventory {
 	public Object viewInventory(){
 		Object[][] data = new Object[10][5];
 		try {
-			Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+			Connection conn = DriverManager.getConnection(AccData.getHost(),  AccData.getUser(),  AccData.getPass());
 			Statement s = conn.createStatement();
 			String query = "Select * from inventory";
 			ResultSet rs = s.executeQuery(query);

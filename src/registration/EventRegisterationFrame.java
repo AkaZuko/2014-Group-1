@@ -79,7 +79,7 @@ public class EventRegisterationFrame {
 		participantname = new Vector<>();
 		addedparticipants = new Vector<>();
 		try{
-			Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+			Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 			Statement s = conn.createStatement();
 			String query = "Select ID,Name from participantdata where Institute=\""+this.Inst+"\";";
 			ResultSet rs = s.executeQuery(query);
@@ -171,7 +171,7 @@ public class EventRegisterationFrame {
 				if(validate(comboBox.getSelectedItem().toString(),noOfPart)) lblWarning.setText("Select apt number of players");
 				else{
 					try {
-						Connection conn = DriverManager.getConnection(AccData.getHost(),"root","12345");
+						Connection conn = DriverManager.getConnection(AccData.getHost(),AccData.getUser(), AccData.getPass());
 						Statement s = conn.createStatement();
 						String query;
 						String game = "";
@@ -180,7 +180,8 @@ public class EventRegisterationFrame {
 						if(comboBox.getSelectedItem().toString().equals("Cricket")) game = "CR";
 						if(comboBox.getSelectedItem().toString().equals("TableTennis")) game = "TT";
 						while(addedparticipants.size() != 0){
-							query = "UPDATE participantdata SET "+game+"=\""+txtTeamname.getText()+"\" WHERE Name =\""+addedparticipants.get(0)+"\";";
+							query = "UPDATE participantdata SET "+game+"=\""+txtTeamname.getText()+
+									"\" WHERE Name =\""+addedparticipants.get(0)+"\";";
 							s.addBatch(query);
 							addedparticipants.remove(0);
 						}

@@ -27,7 +27,7 @@ public class Participant {
 
 	public Participant(String Id) {
 		try{
-		Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+		Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 		Statement s = conn.createStatement();
 		String query = "Select * from participantdata";
 		ResultSet rs = s.executeQuery(query);

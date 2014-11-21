@@ -16,6 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Current Database: `Spree`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `Spree` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `Spree`;
+
+--
 -- Table structure for table `emdata`
 --
 
@@ -163,8 +171,32 @@ CREATE TABLE `logindata` (
 
 LOCK TABLES `logindata` WRITE;
 /*!40000 ALTER TABLE `logindata` DISABLE KEYS */;
-INSERT INTO `logindata` VALUES ('Ajay Sharma','asd.qwert@gmail.com','akazuko','C_1'),('Ms. Monalika','embb@gmail.com','embb123','EM_BB'),('Ms. Sukriti','emcr@gmail.com','emcr123','EM_CR'),('Mr. Prashant','emfo@gmail.com','emfo123','EM_FO'),('Mr. Ayush','emtt@gmail.com','emtt123','EM_TT'),('Abhimanyu Zala','zala.abhi@gmail.com','zalaabhi','P_1');
+INSERT INTO `logindata` VALUES ('Ajay Sharma','asd.qwert@gmail.com','akazuko','C_Head'),('Saurav GG','eventhead1.spree.gmail.com','eventhead1','EH_1'),('Ms. Monalika','embb@gmail.com','embb123','EM_BB'),('Ms. Sukriti','emcr@gmail.com','emcr123','EM_CR'),('Mr. Prashant','emfo@gmail.com','emfo123','EM_FO'),('Mr. Ayush','emtt@gmail.com','emtt123','EM_TT'),('Abhimanyu Zala','zala.abhi@gmail.com','zalaabhi','P_1'),('shamik sharma','cantsay@gmail.com','123456','P_2'),('Abhishek Navhal','abhi.1995@gmail.com','abhi1995','P_3');
 /*!40000 ALTER TABLE `logindata` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `organizerdata`
+--
+
+DROP TABLE IF EXISTS `organizerdata`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `organizerdata` (
+  `ID` varchar(30) DEFAULT NULL,
+  `Name` varchar(100) DEFAULT NULL,
+  `EmailID` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `organizerdata`
+--
+
+LOCK TABLES `organizerdata` WRITE;
+/*!40000 ALTER TABLE `organizerdata` DISABLE KEYS */;
+INSERT INTO `organizerdata` VALUES ('C_Head','Anadi Mishra','convenor.spree@gmail.com'),('EH_1','Saurav GG','eventhead1.spree@gmail.com');
+/*!40000 ALTER TABLE `organizerdata` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -180,7 +212,11 @@ CREATE TABLE `participantdata` (
   `Password` varchar(200) DEFAULT NULL,
   `Email` varchar(200) DEFAULT NULL,
   `Age` int(11) DEFAULT NULL,
-  `Institute` varchar(200) DEFAULT NULL
+  `Institute` varchar(200) DEFAULT NULL,
+  `BB` varchar(30) DEFAULT NULL,
+  `TT` varchar(30) DEFAULT NULL,
+  `CR` varchar(30) DEFAULT NULL,
+  `FB` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -190,7 +226,7 @@ CREATE TABLE `participantdata` (
 
 LOCK TABLES `participantdata` WRITE;
 /*!40000 ALTER TABLE `participantdata` DISABLE KEYS */;
-INSERT INTO `participantdata` VALUES ('Abhimanyu Zala','P_1','zalaabhi','zala.abhi@gmail.com',19,'BITS GOA');
+INSERT INTO `participantdata` VALUES ('Abhimanyu Zala','P_1','zalaabhi','zala.abhi@gmail.com',19,'BITS GOA',NULL,NULL,NULL,NULL),('shamik sharma','P_2','123456','cantsay@gmail.com',100,'bits',NULL,NULL,NULL,NULL),('Abhishek Navhal','P_3','abhi1995','abhi.1995@gmail.com',19,'BITS GOA',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `participantdata` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -203,4 +239,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-11-14 22:39:57
+-- Dump completed on 2014-11-20  1:48:39

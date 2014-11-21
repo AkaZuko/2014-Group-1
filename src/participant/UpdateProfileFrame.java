@@ -3,23 +3,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-
-import registration.Registeration;
-
 import common.AccData;
-import common.ViewInventoryFrame;
-
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 
 public class UpdateProfileFrame extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel txtName;
 	private JTextField txtIns;
 	private JTextField txtAge;
@@ -150,10 +148,20 @@ public class UpdateProfileFrame extends JFrame {
 				//sequence : name id pass email address age inst
 				Boolean status = false;
 					try {
-						Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+						Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 						Statement s = conn.createStatement();
-						String query = "Update participantdata SET Name=\"" + txtname.getText() + "\",Password=\"" + txtpass.getText() + "\",Email=\"" + txtemail.getText() + "\",Age=" + txtage.getText() + ",Institute=\"" + txtinst.getText() + "\" WHERE ID=\"" + id + "\";" ;
-						String query2 = "Update logindata SET Name=\"" + txtname.getText() + "\",Password=\"" + txtpass.getText() + "\",Email=\"" + txtemail.getText() +  "\" WHERE ID=\"" + id + "\";" ;
+						String query = "Update participantdata SET Name=\"" + txtname.getText() + 
+								"\",Password=\"" + txtpass.getText() + 
+								"\",Email=\"" + txtemail.getText() + 
+								"\",Age=" + txtage.getText() + 
+								",Institute=\"" + txtinst.getText() + 
+								"\" WHERE ID=\"" + id + "\";" ;
+						
+						String query2 = "Update logindata SET Name=\"" + txtname.getText() + 
+								"\",Password=\"" + txtpass.getText() + 
+								"\",Email=\"" + txtemail.getText() +  
+								"\" WHERE ID=\"" + id + "\";" ;
+						
 						if(validate())  {
 							status = s.execute(query);
 							status = s.execute(query2);

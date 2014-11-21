@@ -15,9 +15,6 @@ public class Cricket extends Games {
 	static int min_participant=2;
 	//@ count keeps track of number of teams registered
 	static int count=0;
-	
-	private static String url = "jdbc:mysql://localhost:3306/Spree";
-
 	static EventManager em=new EventManager();
 	
 	public static EventManager getEM() {
@@ -26,7 +23,7 @@ public class Cricket extends Games {
 	
 	
 	public static void setEM() throws SQLException{
-		Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+		Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 		Statement s = conn.createStatement();
 		String query = "Select * from Event where Name=Cricket";
 		ResultSet rs = s.executeQuery(query);
@@ -34,12 +31,9 @@ public class Cricket extends Games {
 		
 	}
 	
-	public static String getHost() {
-		return url;
-	}
 	
 	public Object getInfo() throws SQLException{
-		Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+		Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 		Statement s = conn.createStatement();
 		String query = "Select * from Event where Name=Cricket";
 		ResultSet rs = s.executeQuery(query);

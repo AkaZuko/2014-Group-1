@@ -7,15 +7,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class AccData {
-	private static String url = "jdbc:mysql://localhost:3306/Spree";
-
+	private final static String url = "jdbc:mysql://localhost:3306/Spree";
+	private final static String user = "root";
+	private final static String pass = "12345";	
+	
 	public static String getHost() {
 		return url;
+	}
+	
+	public static String getUser() {
+		return user;
+	}
+	
+	public static String getPass() {
+		return pass;
 	}
 	public static void main(String[] args){
 		
 		try {
-			Connection conn = DriverManager.getConnection(url, "root", "12345");
+			Connection conn = DriverManager.getConnection(url,user,pass);
 			Statement s = conn.createStatement();
 			String query = "Select * from inventory";
 			ResultSet rs = s.executeQuery(query);

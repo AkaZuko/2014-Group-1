@@ -23,7 +23,7 @@ public class Registeration {
 		
 		
 		try{
-		Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+		Connection conn = DriverManager.getConnection(AccData.getHost(),AccData.getUser(), AccData.getPass());
 		Statement s = conn.createStatement();
 		String query = "Select ID,Password from logindata";
 		ResultSet rs = s.executeQuery(query);
@@ -44,11 +44,21 @@ public class Registeration {
 	
 	public static Boolean submitData(String Name, String idno, String pass, String email, String age, String inst){
 		try {
-			Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+			Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 			Statement s = conn.createStatement();
 			System.out.println("working");
-			String query2 = "INSERT INTO participantdata VALUES(" + "\"" + Name + "\"," + "\"P_" +  idno + "\"," + "\"" + pass + "\"," + "\"" + email +  "\",\"" + Integer.valueOf(age) +  "\"," + "\"" + inst + "\");";
-			String query  = "INSERT INTO logindata VALUES(" + "\"" + Name + "\"," + "\"" + email +  "\"," + "\"" + pass + "\"," + "\"P_" +  idno + "\");";
+			String query2 = "INSERT INTO participantdata VALUES(" + 
+							"\"" + Name + "\"," + 
+							"\"P_" +  idno + "\"," + 
+							"\"" + pass + "\"," + 
+							"\"" + email +  "\",\"" + 
+							Integer.valueOf(age) +  "\"," + 
+							"\"" + inst + "\");";
+			String query  = "INSERT INTO logindata VALUES(" + 
+							"\"" + Name + "\"," + 
+							"\"" + email +  "\"," + 
+							"\"" + pass + "\"," + 
+							"\"P_" +  idno + "\");";
 			Boolean rs2 = s.execute(query2);
 			Boolean rs3 = s.execute(query);
 			System.out.println("working1");						
@@ -65,7 +75,7 @@ public class Registeration {
 	
 	public void updateTotalParticipants(){
 		try{
-			Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+			Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 			Statement s = conn.createStatement();
 			String query = "Select ID,Password from logindata";
 			ResultSet rs = s.executeQuery(query);

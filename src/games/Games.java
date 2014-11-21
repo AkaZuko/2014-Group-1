@@ -9,22 +9,17 @@ import java.sql.Statement;
 import spree.EventManager;
 import common.AccData;
 
-
-@SuppressWarnings("unused")
 public class Games {
 
 	int max_participant;
 	int min_participant;
 	AccData acc;
 	
-	
-
-	private static String url = "jdbc:mysql://localhost:3306/Spree";
 	EventManager em=new EventManager();
 
 
 	public Object getDetails() throws SQLException{
-		Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+		Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 		Statement s = conn.createStatement();
 		String query = "Select * from Event where EventManager="+em.getName();
 		ResultSet rs = s.executeQuery(query);
@@ -59,7 +54,7 @@ public class Games {
 	public void setResult(String d,Games game,int status) throws SQLException{
 	
 		  	
-		Connection conn = DriverManager.getConnection(AccData.getHost(), "root", "12345");
+		Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
 		Statement s = conn.createStatement();
 		
 		String query = "UPDATE Event " +
