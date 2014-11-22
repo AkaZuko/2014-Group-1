@@ -6,6 +6,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import common.AccData;
 
 /**
 * <h1>Accomodation</h1>
@@ -15,14 +25,16 @@ import java.io.IOException;
 * @version 1.0
 */
 
-
+//500 is the cost of one room acquired upon accepting accommodation
 public class Accomodation extends Department {
 
-	static int max_acco_slots;
+	final static int max_acco_slots = 0;
 	static int count;
+
 
 	public Accomodation() throws IOException {
 		super();
+		
 		
 	}
 
@@ -37,54 +49,34 @@ public class Accomodation extends Department {
 	   * @see IO Exception
 	   */
 	
-	public void fillAccoSlots() throws IOException {
-		File pub = new File("res/Accomodation");
-		BufferedReader br = new BufferedReader(new FileReader(pub));
-
-		if (count < max_acco_slots)
-			count++;
-
-		File c = new File("tmp");
-		c.createNewFile();
-
-		BufferedWriter bw = new BufferedWriter(new FileWriter(c));
-
-		String names;
-		names = br.readLine();
-		bw.write(names);
-		bw.newLine();
-		bw.write(String.valueOf((Integer.valueOf(br.readLine())+1)));
-		bw.newLine();
+	public Boolean fillAccoSlots(String ID) throws IOException {
 		
-
-		while ((names = br.readLine()) != null) {
-			bw.write(names);
-			bw.newLine();
-
+		Connection conn;
+		try {
+			conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
+			Statement s = conn.createStatement();
+			String query = "Select COUNT(*) FROM accomodationdata;";
+			ResultSet rs = s.executeQuery(query);
+			while(rs.next()) count = rs.getInt("COUNT(*)"); 
+			if(count < max_acco_slots){	
+			String query1 = "INSERT INTO accomodationdata Values (\""+ID+"\");";
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+			Date date = new Date();
+			String data = dateFormat.format(date);
+			DateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
+			Date date2 = new Date();
+			String data2 = dateFormat2.format(date2);
+			String query2 = "INSERT INTO finance Values(\"" + data + "\",500,\"" + data2 +"\");";
+			s.execute(query1);
+			s.execute(query2);
+			return true;
+			}
+						
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		bw.flush();
-		bw.close();
-
-		pub.delete();
-		pub.createNewFile();
-
-		BufferedReader br1 = new BufferedReader(new FileReader(c));
-		BufferedWriter bw1 = new BufferedWriter(new FileWriter(pub));
-
-		while ((names = br1.readLine()) != null) {
-			bw1.write(names);
-			bw1.newLine();
-
-		}
-
-		bw1.flush();
-		bw1.close();
-		br.close();
-		br1.close();
-
-		 c.delete();
-
+		return false;
 	}
 	
 	/**
@@ -96,27 +88,22 @@ public class Accomodation extends Department {
 	   * @see IO Exception
 	   */
 
-	public String[] getDetails() throws IOException {
+	public String[] getDetails(){
 
 		String details[] = new String[10];
-
-		int i = 0;
-
-		File pub = new File("res/Accomodation");
-		BufferedReader br = new BufferedReader(new FileReader(pub));
-		String line;
-		String line1 = br.readLine();
-		String line2 = br.readLine();
-		max_acco_slots = Integer.getInteger(line1);
-		count = Integer.getInteger(line2);
-
-		while ((line = br.readLine()) != null) {
-
-			details[i] = line;
-			i++;
-
+		try{
+			Connection conn = DriverManager.getConnection(AccData.getHost(),AccData.getUser(),AccData.getPass());
+			Statement s = conn.createStatement();
+			String query = "Select Name from deptdata WHERE Dept=\"Accomodation\";";
+			ResultSet rs = s.executeQuery(query);
+			int i= 0;
+			while(rs.next()){
+				details[i] = rs.getString("Name");
+				i = i+1;
+			}
+		}catch(SQLException e){
+			System.out.println(e.toString());
 		}
-
 		return details;
 
 	}

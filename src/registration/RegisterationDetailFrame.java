@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,6 +21,9 @@ import participant.ParticipantProfileFrame;
 
 import common.AccData;
 import common.Admin;
+import javax.swing.JRadioButton;
+
+import departments.Accomodation;
 
 public class RegisterationDetailFrame {
 
@@ -38,11 +42,14 @@ public class RegisterationDetailFrame {
 	JLabel label6 ;
 	JButton btnRegister ;
 	private JButton btnBack;
+	JRadioButton rdbtnAccomodation;
+	private JLabel lblAccoavail;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -166,12 +173,21 @@ public class RegisterationDetailFrame {
 		});
 		btnBack.setBounds(10, 13, 89, 23);
 		frame.getContentPane().add(btnBack);
+		
+		rdbtnAccomodation = new JRadioButton("Accomodation");
+		rdbtnAccomodation.setBounds(50, 192, 109, 23);
+		frame.getContentPane().add(rdbtnAccomodation);
+		
+		lblAccoavail = new JLabel("");
+		lblAccoavail.setBounds(185, 192, 200, 24);
+		frame.getContentPane().add(lblAccoavail);
 	}
 	
 	class Handler implements ActionListener {
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource().equals(btnRegister)){
 				//sequence : name id pass email address age institute
+				
 				if(validate()) {
 					try {
 						Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
@@ -186,9 +202,31 @@ public class RegisterationDetailFrame {
 						String ID = "P_" + Integer.toString(idno);
 						
 						if(Registeration.submitData(txtNamefield.getText(), Integer.toString(idno), txtPassfield.getText(), txtEmailfield.getText(), txtAgefield.getText(), txtInstfield.getText())){
-							ParticipantProfileFrame participant = new ParticipantProfileFrame(ID);
-							participant.setVisible(true);
-							frame.setVisible(false);
+							if(rdbtnAccomodation.isSelected()){
+								try {
+									Boolean status = new Accomodation().fillAccoSlots(ID);
+									if(status) {
+										lblAccoavail.setText("");
+										ParticipantProfileFrame participant = new ParticipantProfileFrame(ID);
+										participant.setVisible(true);
+										frame.dispose();
+									}
+									else {
+										lblAccoavail.setText("No slots left. Uncheck!");
+										
+									}
+									
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+							else{
+								ParticipantProfileFrame participant = new ParticipantProfileFrame(ID);
+								participant.setVisible(true);
+								frame.dispose();
+							}
+							
 						}
 						rs1.close();
 						s.close();

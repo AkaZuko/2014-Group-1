@@ -21,13 +21,14 @@ public class Admin {
 			String query = "Select Count from admindata;";
 			
 			ResultSet rs = s.executeQuery(query);
+			rs.next();
 			totalRegistrations = rs.getInt("Count");
 
 			rs.close();
 			s.close();
 			conn.close();
 			}catch(SQLException e){
-				e.printStackTrace();
+				System.out.println(e.toString());
 			}
 	}
 	
@@ -42,17 +43,23 @@ public class Admin {
 		String query = "Select Count from admindata;";
 		
 		ResultSet rs = s.executeQuery(query);
-		int count = rs.getInt("Count");
-		count = count + 1;
+		int count = 0;
+		while(rs.next()){
+			count = rs.getInt("Count");
+		}
+		System.out.println(count);
+		int newcount = count + 1;
 		
-		query = "UPDATE admindata SET Count="+Integer.toString(count)+";";
+		query = "UPDATE admindata SET Count="+Integer.toString(newcount)+" WHERE Count="+Integer.toString(count)+";";
 		s.executeUpdate(query);
-		
+		System.out.println("1230");
 		rs.close();
 		s.close();
 		conn.close();
 		}catch(SQLException e){
+			System.out.println("1230");
 			e.printStackTrace();
+			
 		}
 	}
 }

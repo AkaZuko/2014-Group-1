@@ -30,10 +30,8 @@ public class Registeration {
 		
 		while(rs.next()){
 
-		if(password.equals(rs.getString("Password")) && ID.equals(rs.getString("ID"))){
-			System.out.println("VALIDATING!");
-			return true;
-		}
+		if(password.equals(rs.getString("Password")) && ID.equals(rs.getString("ID"))) return true;
+			
 		}
 		
 		}catch(SQLException e){
@@ -53,14 +51,14 @@ public class Registeration {
 							"\"" + pass + "\"," + 
 							"\"" + email +  "\",\"" + 
 							Integer.valueOf(age) +  "\"," + 
-							"\"" + inst + "\");";
+							"\"" + inst + "\",NULL,NULL,NULL,NULL);";
 			String query  = "INSERT INTO logindata VALUES(" + 
 							"\"" + Name + "\"," + 
 							"\"" + email +  "\"," + 
 							"\"" + pass + "\"," + 
 							"\"P_" +  idno + "\");";
-			Boolean rs2 = s.execute(query2);
-			Boolean rs3 = s.execute(query);
+			s.execute(query2);
+			s.execute(query);
 			System.out.println("working1");						
 			
 			s.close();
@@ -82,7 +80,7 @@ public class Registeration {
 			
 			while(rs.next()) totalParticipants++;
 			}catch(SQLException e){
-				System.out.println(e.toString());
+				System.out.println("123"+e.toString());
 			}
 		}
 	

@@ -1,11 +1,7 @@
 package departments;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,13 +26,21 @@ public class Finance extends Department {
 
 	public Finance() throws IOException {
 		super();
+		try{
+		Connection conn = DriverManager.getConnection(AccData.getHost(),
+				AccData.getUser(), AccData.getPass());
+		Statement s = conn.createStatement();
+		String query = "SELECT SUM(CashInFlow) FROM finance;";
+		ResultSet rs = s.executeQuery(query);
+		while (rs.next()) {
+			total_amount = (int) rs.getInt("SUM(CashInFlow)");
+		}
+		}catch(SQLException e){
+			System.out.println(this.getClass().toString() + " ERROR : " + e.toString());
+		}
 
 	}
 	
-	
-	
-
-	private static int totalAmount = 0;
 	
 	
 	/**
@@ -50,9 +54,9 @@ public class Finance extends Department {
 	
 	public Object[][] getFinanceDetails() throws SQLException {
 		Connection conn = DriverManager.getConnection(AccData.getHost(),
-				"root", "12345");
+				AccData.getUser(), AccData.getPass());
 		Statement s = conn.createStatement();
-		String query = "Select * from Finance;";
+		String query = "Select * from finance;";
 		ResultSet rs = s.executeQuery(query);
 
 		int i = 0;
@@ -79,22 +83,22 @@ public class Finance extends Department {
 	   * @see IO Exception
 	   */
 
-	public String[] getDetails() throws IOException {
+	public String[] getDetails(){
 
-		File pub = new File("res/Finance");
 		String details[] = new String[10];
-
-		int i = 0;
-
-		BufferedReader br = new BufferedReader(new FileReader(pub));
-		String line;
-		while ((line = br.readLine()) != null) {
-
-			details[i] = line;
-			i++;
-
+		try{
+			Connection conn = DriverManager.getConnection(AccData.getHost(),AccData.getUser(),AccData.getPass());
+			Statement s = conn.createStatement();
+			String query = "Select Name from deptdata WHERE Dept = \"Finance\";";
+			ResultSet rs = s.executeQuery(query);
+			int i= 0;
+			while(rs.next()){
+				details[i] = rs.getString("Name");
+				i = i+1;
+			}
+		}catch(SQLException e){
+			System.out.println(e.toString());
 		}
-
 		return details;
 
 	}
@@ -109,25 +113,22 @@ public class Finance extends Department {
 	   * @see SQL Exception
 	   */
 	
-	public void addPayment() throws SQLException {
+	public void addPayment(String amt) throws SQLException {
 
 		Connection conn = DriverManager.getConnection(AccData.getHost(),
 				AccData.getUser(), AccData.getPass());
 		Statement s = conn.createStatement();
-		String query = "SELECT * FROM Finance;";
+		String query = "SELECT SUM(CashInFlow) FROM finance;";
 		ResultSet rs = s.executeQuery(query);
 		while (rs.next()) {
-			total_amount = (int) rs.getInt("CashInFlow");
+			total_amount = (int) rs.getInt("SUM(CashInFlow)");
 		}
-
-		total_amount += 1000;
-
 		java.util.Date utilDate = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		java.sql.Time sqlTime = new java.sql.Time(utilDate.getTime());
 
-		String query2 = "insert into Finance values ('" + sqlDate + "','"
-				+ total_amount + "','" + sqlTime + "');";
+		String query2 = "insert into finance values ('" + sqlDate + "','"
+				+ amt + "','" + sqlTime + "');";
 		boolean rs2 = s.execute(query2);
 
 	}

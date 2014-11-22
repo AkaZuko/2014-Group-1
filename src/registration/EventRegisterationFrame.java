@@ -16,6 +16,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -23,12 +26,16 @@ import javax.swing.JButton;
 import common.AccData;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+
 import javax.swing.JTextField;
 
 import participant.ParticipantProfileFrame;
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 import com.sun.corba.se.spi.orbutil.fsm.State;
+
+import departments.Finance;
 
 public class EventRegisterationFrame {
 
@@ -186,12 +193,36 @@ public class EventRegisterationFrame {
 							addedparticipants.remove(0);
 						}
 						int count[] = s.executeBatch();
+						/*DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+						Date date = new Date();
+						String data = dateFormat.format(date);
+						DateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
+						Date date2 = new Date();
+						String data2 = dateFormat2.format(date2);
+						String query2 = "";*/
+						//quer2 is inside the following if, just commented outside
+						//query2 = "INSERT INTO finance Values(\"" + data + "\",2500,\"" + data2 +"\");";
+						if(!comboBox.getSelectedItem().toString().equals("TableTennis"))
+							try {
+								new Finance().addPayment("2500");
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								System.out.println(this.getClass().toString() + " ERROR : " + e.toString());
+							}
+						else
+							try {
+								new Finance().addPayment("500");
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								System.out.println(this.getClass().toString() + " ERROR : " + e.toString());
+							}
 						frame.dispose();
 						ParticipantProfileFrame par = new ParticipantProfileFrame(ID);
 						conn.close();
 						
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
+						System.out.println(this.getClass().toString() + " ERROR : " + e.toString());
 						e1.printStackTrace();
 					}
 					

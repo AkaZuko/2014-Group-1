@@ -1,20 +1,15 @@
 package eventManager;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,51 +25,32 @@ import common.AccData;
 
 public class SendMessageFrame extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
-	public String t = "   ";
-	static String y = "  ";
 	String u ;
+	JTextArea textArea;
 	public SendMessageFrame(String usern) {
-		
 		u = usern;
 		init();
-
+		if(!u.equals(""))
+		this.setVisible(true);
+		else
+			this.setVisible(false);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	public static void main(String[] args){
+		SendMessageFrame fr = new SendMessageFrame("EM_TT");
+		
+		
+	}
 	
 	public void init(){
-		
-		
-		 //int i =0;
-		 /*String[] x = new String[50];
-		
-		try{
-			FileReader inputFile = new FileReader("\\Group-1\\res\\message.txt");
-		
-		 BufferedReader bufferReader = new BufferedReader(inputFile);
-		 String line;
-		 while ((line = bufferReader.readLine()) != null)   {
-			 
-			//to store all the lines
-			x[i] = line;
-			i++;
-	        //System.out.println(line);
-	        
-	    }
-		
-	    bufferReader.close();
-	    }
-
-	catch(Exception e){
-	            System.out.println("Error while reading file line by line:" 
-	            + e.getMessage());                      
-	    }
-		 
-		*/ 
-		
 		this.setBounds(100, 100, 450, 400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -101,26 +77,60 @@ public class SendMessageFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if(!textField.getText().equals("")){
+				try{
+					Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
+					Statement s = conn.createStatement();
+					String query = "Select Count from messagecount;";
+					ResultSet rs = s.executeQuery(query);
+					int count = 0;
+					DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+					Date date = new Date();
+					String data = dateFormat.format(date);
+					while(rs.next()) count = rs.getInt("Count");
+					
+					if(count == 7){
+						query = "Select * from messagedata;";
+						rs = s.executeQuery(query);
+						int i = 2;
+						while(rs.next() && i <=7){
+							query = "UPDATE messagedata " +
+									"SET Body=\"" + rs.getString("Body")+ "\"," +
+									"Date = \"" + rs.getString("Date") +
+									"\" WHERE No="+ Integer.toString(i)+";";	
+							i = i+1;
+							System.out.println(i);
+							s.addBatch(query);
+						}
+						s.executeBatch();
+						query = "UPDATE messagedata " +
+								"SET Body=\"" + textField.getText()+ "\"," +
+								"Date = \"" + data +
+								"\" WHERE No=1;";
+						s.executeUpdate(query);
+					}
+					else{
+						count = count + 1;
+						query = "UPDATE messagedata " +
+								"SET Body=\"" + textField.getText()+ "\"," +
+								"Date = \"" + data +
+								"\" WHERE No="+Integer.toString(count) + ";";
+
+						s.executeUpdate(query);
+
+						query = "UPDATE messagecount " +
+								"SET Count="+Integer.toString(count)+";";
+
+						s.execute(query);
+					}
+				textArea.setText(getMessage());	
+					
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
 				
-				String text = textField.getText();
 				
-		       try {
-		    	   BufferedWriter output = new BufferedWriter(new FileWriter("\\Group-1\\res\\message.txt",true));
-		  
-		         output.append(text+'\n');
-		    //     output.newLine();
-		         
-		         output.close();
-		       } catch ( IOException e ) {
-		          e.printStackTrace();
-		       }
-		       
-		       y= "Message Sent!!!";
-		       setVisible(false);
-		       SendMessageFrame updated = new SendMessageFrame(u);
-		       updated.setVisible(true);
-				
-			}
+			}}
 		});
 
 		
@@ -128,21 +138,8 @@ public class SendMessageFrame extends JFrame {
 		JButton btnShowRecentMessages = new JButton("Show Recent Messages");
 		btnShowRecentMessages.setBounds(33, 146, 218, 25);
 		
-		String message = "";
-		try{
-			Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
-			Statement s = conn.createStatement();
-			String query = "Select Count from messagecount;";
-			ResultSet rs = s.executeQuery(query);
-			int count = rs.getInt("Count");
-			
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
 		
-		
-		
-		JTextArea textArea = new JTextArea(message);
+		textArea = new JTextArea(this.getMessage());
 		textArea.setBounds(45, 161, 374, 150);
 		getContentPane().add(textArea);
 		
@@ -161,14 +158,33 @@ public class SendMessageFrame extends JFrame {
 		getContentPane().add(lblNewLabel);
 		
 		
+		
 		btnEmHome.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				EventManagerFrame fr = new EventManagerFrame(u);
-				setVisible(false);
+				fr.setVisible(true);
+				dispose();
 			}
 		});
 	}
+	
+	public String getMessage(){
+		String message = "";
+		try{
+			Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
+			Statement s = conn.createStatement();
+			String query = "Select Body from messagedata ORDER BY Date DESC;";
+			ResultSet rs = s.executeQuery(query);
+			while(rs.next()) message = message + rs.getString("Body") + "\n";
+			}catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	
+	
 }
 	

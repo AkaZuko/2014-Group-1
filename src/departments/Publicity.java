@@ -1,10 +1,13 @@
 package departments;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.CharBuffer;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import common.AccData;
 
 
 /**
@@ -19,7 +22,7 @@ import java.nio.CharBuffer;
 
 public class Publicity extends Department {
 
-	public Publicity() throws IOException {
+	public Publicity() throws IOException{
 		super();
 
 	}
@@ -33,22 +36,22 @@ public class Publicity extends Department {
 	   * @see IO Exception
 	   */
 	
-	public String[] getDetails() throws IOException {
+	public String[] getDetails(){
 
-		File pub = new File("res/Publicity");
 		String details[] = new String[10];
-
-		int i = 0;
-
-		BufferedReader br = new BufferedReader(new FileReader(pub));
-		String line;
-		while ((line = br.readLine()) != null) {
-
-			details[i] = line;
-			i++;
-
+		try{
+			Connection conn = DriverManager.getConnection(AccData.getHost(),AccData.getUser(),AccData.getPass());
+			Statement s = conn.createStatement();
+			String query = "Select Name from deptdata WHERE Dept=\"Publicity\";";
+			ResultSet rs = s.executeQuery(query);
+			int i= 0;
+			while(rs.next()){
+				details[i] = rs.getString("Name");
+				i = i+1;
+			}
+		}catch(SQLException e){
+			System.out.println(e.toString());
 		}
-		br.close();
 		return details;
 
 	}
