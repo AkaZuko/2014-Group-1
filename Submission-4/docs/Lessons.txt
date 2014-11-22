@@ -1,0 +1,9 @@
+a) Positives of your group
+-Everyone was interested in the project and showed geniune interest in learning new concepts for the project.
+-Everyone made contributions for every submission.
+b) Negatives of your group
+-Time management wasn't efficient.
+-We weren't acquainted with various new concepts (GUI, MySQL) from before. Hence we all had to invest a lot of time in learning which time management even more.
+c) What would you do differently next time?
+-Better planning for more effient use of time.
+-Having realistic expectations from the project.

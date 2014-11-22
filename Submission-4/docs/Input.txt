@@ -1,0 +1,12 @@
+Use Case(numbers) : 3
+
+Use Case 1 : participant : Register using user-interactive frame to get username and password for next session
+
+Use case 2: Event Manager : LoginID - EM_TT  & Password - emtt123
+
+Use Case 3: Events Head : LoginID - EH_1 & Password - eventhead1
+
+
+Output: You will be guided  sing user-interactive frames after logging-in.
+
+//only participant needs to register
