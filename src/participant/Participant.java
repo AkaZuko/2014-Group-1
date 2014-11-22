@@ -1,5 +1,6 @@
 package participant;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -13,8 +14,18 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.PreparedStatement;
 
+import departments.*;
+
 import registration.EventRegisterationFrame;
 
+/**
+* <h1>Participant</h1>
+* This class defines the various functions of participant like view dashboard
+* do event registration and update profile. 
+* 
+* @author  Group_1 spree
+* @version 1.0
+*/
 public class Participant {
 
 	private String name;
@@ -27,7 +38,8 @@ public class Participant {
 
 	public Participant(String Id) {
 		try{
-		Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
+		
+			Connection conn = DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql458738","sql458738","dD9*gY3*");
 		Statement s = conn.createStatement();
 		String query = "Select * from participantdata";
 		ResultSet rs = s.executeQuery(query);
@@ -50,17 +62,42 @@ public class Participant {
 	
 
 	}
+	/**
+	   * This is the displayDash() method which displays the dashboard of participant 
+	   * 
+	   * @param none
+	   * @return none	   
+	   */
 	public void displayDash() {
-		DashboardFrame dashFrame = new DashboardFrame();// Add attributes to the constructor
-		// eveFrame.setVisible(true);
+		try {
+			DashboardFrame dashFrame = new DashboardFrame();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
-
+	
+	/**
+	   * This is the doEventRegPar() method which registers the participant for 
+	   * a particular event
+	   * 
+	   * @param none
+	   * @return none	   
+	   */
 	public void doEventRegPar() {
 
-		EventRegisterationFrame eveFrame = new EventRegisterationFrame(id,institution);// Add attributes to the constructor
-		// eveFrame.setVisible(true);
+		EventRegisterationFrame eveFrame = new EventRegisterationFrame(id,institution);
 	}
-
+		
+	/**
+	   * This is the updateProfile() method which updates the profile of participant 
+	   * 
+	   * @param none
+	   * @return none
+	   * @exception SQL Exception On database error.
+	   * @see SQL Exception	   
+	   */
 	public void updateProfile() throws SQLException {
 
 		UpdateProfileFrame upframe = new UpdateProfileFrame(id);

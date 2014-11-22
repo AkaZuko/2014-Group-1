@@ -2,6 +2,7 @@ package spree;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -60,7 +61,12 @@ public class InventoryTest {
 	//Object[][] k
 	@Test
 	public void testViewInventory() {
-		assertEquals(data.getClass(),i1.viewInventory().getClass());
+		try {
+			assertEquals(data.getClass(),i1.viewInventory().getClass());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 

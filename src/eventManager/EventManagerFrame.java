@@ -11,23 +11,29 @@ import javax.swing.JLabel;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
+import java.io.IOException;
+
 import javax.swing.SwingConstants;
 
 import registration.LoginFrame;
 
 import common.DashboardFrame;
 
-/*
- * @author monalika
- */
-
+/**
+* <h1>SubmitScheduleFrame</h1>
+* This class provide provides the first frame to Event Manager after logging in
+* 
+* @author  Group_1 spree
+* @version 1.0
+*/
 
 
 public class EventManagerFrame extends JFrame {
 	EventManager em;
 	JButton btnDashboard_1;
 	/**
-	 * Launch the application.
+	 * This is the constructor for the the class EventManager
+	 *  @param String ID of the the Eventmanager
 	 */
 	
 	public EventManagerFrame(final String ID) {
@@ -173,7 +179,12 @@ public class EventManagerFrame extends JFrame {
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource().equals(btnDashboard_1)){
 							
-			DashboardFrame dash = new DashboardFrame();
+			try {
+				DashboardFrame dash = new DashboardFrame();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			
 		}
 	}

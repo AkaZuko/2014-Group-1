@@ -33,7 +33,7 @@ import java.awt.Color;
 
 public class SubmitScheduleFrame extends JFrame {
 
-	// private JFrame frame;
+
 	String ID;
 	JButton btnSubmit;
 	JComboBox comboBox;
@@ -231,7 +231,6 @@ public class SubmitScheduleFrame extends JFrame {
 	/**
 	   * This is the getData() method which gets data from database to display on he frame
 	   * 
-	   * @param none
 	   * @return Object[][]
 	   * @exception SQL Exception On database error.
 	   * @see SQL Exception		   

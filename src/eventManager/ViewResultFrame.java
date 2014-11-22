@@ -11,9 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 
-/*
- * @author monalika
- */
+/**
+* <h1>SubmitScheduleFrame</h1>
+* This class provide functionality to Event Manager to view results frame
+* 
+* @author  Group_1 spree
+* @version 1.0
+*/
 
 public class ViewResultFrame extends JFrame {
 	private String ID;
@@ -26,6 +30,8 @@ public class ViewResultFrame extends JFrame {
 	static int i= 0;
 	/**
 	 * Initialize the contents of the frame.
+	 * @param none
+	 * @exception Exception
 	 */
 	private void initialize() {
 		

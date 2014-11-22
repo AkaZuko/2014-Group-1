@@ -1,15 +1,26 @@
 package common;
-
+/*
+ * This class provides functionality for 
+ * displaying the dashboard frame.
+ * 
+ * @author Group1_Spree
+ * @version 1.0
+ */
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JTextArea;
+
 import java.awt.SystemColor;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
+
 import javax.swing.JButton;
 
 import eventManager.SendMessageFrame;
@@ -44,8 +55,9 @@ public class DashboardFrame {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public DashboardFrame() {
+	public DashboardFrame() throws IOException {
 		initialize();
 		frame.setVisible(true);
 		
@@ -54,10 +66,11 @@ public class DashboardFrame {
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void initialize() {
+	private void initialize() throws IOException {
 		
-
+		AccData.addToLog("Dashboard viewed");
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

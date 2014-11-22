@@ -9,13 +9,22 @@ import departments.*;
 
 import common.AccData;
 
-
+/**Class for Convenor of Spree
+ * 
+ * @author spree_group1
+ * @version 1.0
+ *
+ */
 public class Convenor implements OrganizingCommitte {
 
 	private String Name=null;
 	private String emailID=null;
 	private String ID = null;
 	
+	/**
+	 * constructor of convenor class, fetches details of the convenor from organozerdata database
+	 * @param Id 
+	 */
 	public Convenor(String Id){
 		Statement stmt=null;
 		try{
@@ -40,15 +49,25 @@ public class Convenor implements OrganizingCommitte {
 	}
 	
 	
-	/**** TO GET NAME OF CONVENOR FROM DATABASE****/
+	/**
+	 * Get method for convenor name
+	 * @return Name of convenor
+	 */
 	public String getName() {
 		return Name;
 	}
-	
+	/**
+	 * Get method for email ID of convenor
+	 * @return
+	 */
 	public String getEmailID() {
 			return emailID;
 	}
 
+	/**
+ * set method to set the email id of the convenor
+ * @param emailID email id of the convenor
+ */
 	public void setEmailID(String emailID) {
 		this.emailID = emailID;
 	}

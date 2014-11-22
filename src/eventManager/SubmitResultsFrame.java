@@ -25,11 +25,12 @@ import javax.swing.JRadioButton;
 
 import common.AccData;
 import eventManager.SubmitScheduleFrame.Handler;
-
-/*
- * @author monalika
- */
-
+/**
+* <h1>SubmitScheduleFrame</h1>
+* This class provides frame to help Event Manger Submit Results
+* @author  Group_1 spree
+* @version 1.0
+*/
 
 public class SubmitResultsFrame extends JFrame {
 	private String ID;
@@ -87,12 +88,13 @@ public class SubmitResultsFrame extends JFrame {
 		
 	}
 	
-
 	/**
-	 * Initialize the contents of the frame.
+	 * Used to initialize the contents of the frame.
+	 *
 	 */
+	
 	private void initialize() {
-		//frame = new JFrame();
+		
 		this.setBounds(100, 100, 450, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(null);
@@ -121,7 +123,7 @@ public class SubmitResultsFrame extends JFrame {
 		comboBox = new JComboBox(new DefaultComboBoxModel(new String[] {"D1","D2","D3"}));
 		comboBox.setBounds(61, 51, 76, 25);
 		getContentPane().add(comboBox);
-	//	comboBox.
+
 		
 		JLabel lblNewLabel = new JLabel("Day:");
 		lblNewLabel.setBounds(23, 51, 28, 25);
@@ -162,11 +164,13 @@ public class SubmitResultsFrame extends JFrame {
 		getContentPane().add(lblNewLabel_2);
 		
 
+		}
 	
-	
-	}
-	
-	
+	/*
+	 * used for getTeams button and Submit Button
+	 * @exception SQLException
+	 * @exception NullPointerException
+	 */
 		class Handler implements ActionListener{
 			
 			@SuppressWarnings("deprecation")
