@@ -41,7 +41,7 @@ public class LoginFrame {
 	
 	private String ID;
 	private String password;
-	/**
+	/** 
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {

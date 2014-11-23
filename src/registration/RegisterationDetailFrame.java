@@ -182,7 +182,7 @@ public class RegisterationDetailFrame {
 		frame.getContentPane().add(rdbtnAccomodation);
 		
 		lblAccoavail = new JLabel("");
-		lblAccoavail.setBounds(185, 192, 200, 24);
+		lblAccoavail.setBounds(185, 175, 200, 41);
 		frame.getContentPane().add(lblAccoavail);
 	}
 	
@@ -215,7 +215,10 @@ public class RegisterationDetailFrame {
 										frame.dispose();
 									}
 									else {
-										lblAccoavail.setText("No slots left. Uncheck!");
+										lblAccoavail.setText("No slots left. Uncheck!" +
+												"\nAlraedy Registered");
+										btnRegister.setVisible(false);
+										
 										
 									}
 									

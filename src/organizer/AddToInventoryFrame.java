@@ -31,14 +31,14 @@ import eventManager.EventManagerFrame;
 public class AddToInventoryFrame extends JFrame{
 
 	private JFrame frame;
-	private static String ID;
+	private String ID;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args){
 		try{
-			AddToInventoryFrame var = new AddToInventoryFrame(ID);
+			AddToInventoryFrame var = new AddToInventoryFrame(args[0]);
 			var.frame.setVisible(true);
 		}catch(Exception e){
 			e.printStackTrace();

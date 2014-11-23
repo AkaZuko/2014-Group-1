@@ -19,7 +19,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class AccData {
-	private final static String url = "jdbc:mysql://localhost:3306/Spree";
+	private final static String url = "jdbc:mysql://127.0.0.1:3306/Spree";
 	//private final static String url = "jdbc:mysql://sql4.freemysqlhosting.net:3306/sql458738";
 	private final static String user = "root";
 	//private final static String user = "sql458738";

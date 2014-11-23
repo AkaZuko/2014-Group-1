@@ -15,6 +15,8 @@ import java.io.IOException;
 
 import javax.swing.SwingConstants;
 
+import organizer.AddToInventoryFrame;
+
 import registration.LoginFrame;
 
 import common.DashboardFrame;
@@ -159,6 +161,25 @@ public class EventManagerFrame extends JFrame {
 		});
 		btnLogOut.setBounds(14, 35, 89, 23);
 		getContentPane().add(btnLogOut);
+		
+		JButton btnRequestInventory = new JButton("Request Inventory");
+		btnRequestInventory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					//AddToInventoryFrame window = new AddToInventoryFrame(ID);
+					//window.setVisible(true);
+					String[] parameter={ID,""};
+					new RequestInventoryFrame(ID).main(parameter);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				//RequestInventoryFrame ri = new RequestInventoryFrame(ID);
+				//ri.setVisible(true);
+				dispose();
+			}
+		});
+		btnRequestInventory.setBounds(33, 225, 156, 23);
+		getContentPane().add(btnRequestInventory);
 		btnViewResults.addActionListener(new ActionListener() {
 			
 			@Override

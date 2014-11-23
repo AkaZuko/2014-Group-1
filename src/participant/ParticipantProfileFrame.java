@@ -87,7 +87,7 @@ public class ParticipantProfileFrame extends JFrame {
 		getContentPane().add(lblName);
 		
 		JLabel lblId = new JLabel("ID : " + ID);
-		lblId.setBounds(303, 11, 46, 14);
+		lblId.setBounds(303, 11, 96, 14);
 		getContentPane().add(lblId);
 		
 		JLabel lblEMail = new JLabel("E Mail");

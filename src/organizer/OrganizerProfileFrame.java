@@ -412,7 +412,8 @@ public class OrganizerProfileFrame extends JFrame{
 				try {
 					//AddToInventoryFrame window = new AddToInventoryFrame(ID);
 					//window.setVisible(true);
-					new AddToInventoryFrame(ID).main(null);
+					String[] parameter={ID,""};
+					new AddToInventoryFrame(ID).main(parameter);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

@@ -39,7 +39,7 @@ public class Participant {
 	public Participant(String Id) {
 		try{
 		
-			Connection conn = DriverManager.getConnection("jdbc:mysql://sql4.freemysqlhosting.net:3306/sql458738","sql458738","dD9*gY3*");
+			Connection conn = DriverManager.getConnection(AccData.getHost(),AccData.getUser(),AccData.getPass());
 		Statement s = conn.createStatement();
 		String query = "Select * from participantdata";
 		ResultSet rs = s.executeQuery(query);
