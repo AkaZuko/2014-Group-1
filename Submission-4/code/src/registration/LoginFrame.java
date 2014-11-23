@@ -6,6 +6,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JFormattedTextField;
@@ -129,7 +131,13 @@ public class LoginFrame {
 			if(e.getSource().equals(btnLogin)){
 				password = new String(passwordField.getPassword());
 				ID = formattedTextField.getText();
-				Boolean result = admin.authenticateLogin(ID, password);
+				Boolean result = false;
+				try {
+					result = admin.authenticateLogin(ID, password);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				if(result) {
 					//ProfileFrame is displayed based upon the type of user

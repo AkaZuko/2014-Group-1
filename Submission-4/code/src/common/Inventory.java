@@ -1,10 +1,20 @@
 package common;
+/*
+ * This class provides functionality for 
+ * accessing and modifying inventory.
+ * 
+ * @author Group1_Spree
+ * @version 1.0
+ */
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+
 
 
 import javax.swing.JLabel;
@@ -13,7 +23,21 @@ import javax.swing.JTable;
 
 public class Inventory {
 
-	public Object viewInventory(){
+	
+	/*
+	 * This function acts to view the inventory database   
+	 * and all that is in it.
+	 *
+	 * 
+	 * @return Object  
+	 * @param none
+	 * @Exception IOException
+	 * @see IOException
+	 * 
+	 */
+	public Object viewInventory() throws IOException{
+		
+		AccData.addToLog("Inventory viewed");
 		Object[][] data = new Object[10][5];
 		try {
 			Connection conn = DriverManager.getConnection(AccData.getHost(),  AccData.getUser(),  AccData.getPass());

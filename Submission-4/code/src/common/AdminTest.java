@@ -2,6 +2,7 @@ package common;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -44,7 +45,7 @@ public class AdminTest {
 	}
 
 	@Test
-	public void testAuthenticateLogin() {
+	public void testAuthenticateLogin() throws IOException {
 		
 		assertEquals(Boolean.valueOf(true),ad.authenticateLogin( "T_1","12345"));
 	}

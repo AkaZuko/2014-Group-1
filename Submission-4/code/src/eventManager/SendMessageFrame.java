@@ -19,15 +19,17 @@ import javax.swing.JTextArea;
 
 import common.AccData;
 
-/*
- * @author Spree_Group 1
- */
+
+/**
+* <h1>SubmitScheduleFrame</h1>
+* This class provides frame to allow event manager to send message in Text box
+* 
+* @author  Group_1 spree
+* @version 1.0
+*/
 
 public class SendMessageFrame extends JFrame {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	String u ;
@@ -41,15 +43,17 @@ public class SendMessageFrame extends JFrame {
 			this.setVisible(false);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	public static void main(String[] args){
 		SendMessageFrame fr = new SendMessageFrame("EM_TT");
 		
 		
 	}
-	
+
+	/**
+	 * Initialize the contents of the frame.
+	 * @param none
+	 * @return void
+	 */
 	public void init(){
 		this.setBounds(100, 100, 450, 400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -169,7 +173,11 @@ public class SendMessageFrame extends JFrame {
 			}
 		});
 	}
-	
+	/*
+	 * This is to get the message from the database
+	 * @param none
+	 * @return void 
+	 * */
 	public String getMessage(){
 		String message = "";
 		try{

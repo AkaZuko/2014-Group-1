@@ -11,6 +11,11 @@ import java.util.Date;
 
 import common.AccData;
 
+/**
+ * This class is for the events head
+ * @author spree_group1
+ *
+ */
 public class EventHead implements  OrganizingCommitte {
 	
 	private String Name=null;
@@ -18,6 +23,11 @@ public class EventHead implements  OrganizingCommitte {
 	private String ID = null;
 	
 	Connection conn;
+	
+	/**
+	 * constructor of EventHead class, fetches details of the convenor from organizerdata database
+	 * @param ID
+	 */
 	public EventHead(String ID){
 		Statement stmt=null;
 		try{
@@ -41,22 +51,37 @@ public class EventHead implements  OrganizingCommitte {
 		}
 		
 	}
-
+	
+/**
+ * get method for id for the events head
+ * @return ID 
+ */
 	public String getID() {
 		return ID;
 	}
 
+	/**
+ * get method for the email id of the events head
+ * @return
+ */
 	public String getEmailID() {
 		return emailID;
 	}
 
-
+/**
+ * Get method for event head's name
+ * @return
+ */
 	public String getName() {
 		return Name;
 	}
 	
 	
-	
+	/**Used by events head to add items into the inventory
+	 * 
+	 * @param itemName name of the item that needs to be pushed
+	 * @param quantity number of items that need to be pushed
+	 */
 	public void pushItem(String itemName ,int quantity){
 		Statement s=null;
 		//String query;
@@ -157,6 +182,9 @@ public class EventHead implements  OrganizingCommitte {
 		}
 	}
 	
+	/**
+	 * Used to approve the inventory Request(which was requested by EM) by Events Head 
+	 */
 	public void popItem(){
 		String query;
 		int value[]=new int[10];

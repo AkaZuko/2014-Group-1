@@ -1,5 +1,13 @@
 package common;
 
+/*
+ * This class provides functionality for 
+ * validating and authenticating login.
+ * 
+ * @author Group1_Spree
+ * @version 1.0
+ */
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -32,7 +40,18 @@ public class Admin {
 			}
 	}
 	
-	public Boolean authenticateLogin(String ID, String pass){
+	
+	/*
+	 * This function acts to authenticateLogin 
+	 *
+	 * 
+	 * @return Boolean 
+	 * @param String id, String password 
+	 * @Exception IOException
+	 */
+	public Boolean authenticateLogin(String ID, String pass) throws IOException{
+		AccData.addToLog("Admin authenticates");
+		
 		return Registeration.validateData(pass, ID);
 	}
 	

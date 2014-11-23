@@ -50,7 +50,7 @@ public class Accomodation extends Department {
 	   */
 	
 	public Boolean fillAccoSlots(String ID) throws IOException {
-		
+		AccData.addToLog("Accomodation slot filled!");
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
@@ -89,7 +89,12 @@ public class Accomodation extends Department {
 	   */
 
 	public String[] getDetails(){
-
+		try {
+			AccData.addToLog("Accomodation viewed");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		String details[] = new String[10];
 		try{
 			Connection conn = DriverManager.getConnection(AccData.getHost(),AccData.getUser(),AccData.getPass());

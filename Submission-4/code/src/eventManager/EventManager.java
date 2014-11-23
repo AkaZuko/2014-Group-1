@@ -7,9 +7,13 @@ import java.sql.Statement;
 
 import common.AccData;
 
-/*
- * @author monalika
- */
+/**
+* <h1>SubmitScheduleFrame</h1>
+* This class provide sets the values for the Event Manager depending on the loginID
+* 
+* @author  Group_1 spree
+* @version 1.0
+*/
 
 public class EventManager {
 	
@@ -19,17 +23,16 @@ public class EventManager {
  	   private String Game;
  	   private String EmailID;
  	   private String ID;
-	
+ 	  /**
+ 	   * This is the constructor for the the class EventManager
+ 	   * @param String ID of the the Eventmanager
+ 	   *  @exception IOException
+ 	   */
 	public EventManager(String ID) {
 		Connection conn = null;
 		Statement stmt = null;
 		
-		// In the Spree database create table having 4 columns as username, name, emailID, game 
-		//use the particular order and name of the variables
-		//add entries for all 5 games
-		
-	 
-			//this is extract data from the database
+
 		try{
 		      
 		      Class.forName("com.mysql.jdbc.Driver");

@@ -68,6 +68,8 @@ public class ViewInventoryFrame {
                 "No Of Items",
                 "Last Date of Modification"};
 		
+		
+		
 		table = new JTable(data,columnNames);
 		table.setBounds(20, 70, 382, 160);
 		frame.getContentPane().add(table);

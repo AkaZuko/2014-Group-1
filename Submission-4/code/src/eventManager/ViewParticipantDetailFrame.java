@@ -119,7 +119,6 @@ public class ViewParticipantDetailFrame extends JFrame {
 	/**
 	   * This is viewParticipantDetails() method takes data from the database to display it 
 	   * 
-	   * @param none
 	   * @return Object[][]
 	   *  @exception SQL Exception On database error.
 	   * @see SQL Exception	

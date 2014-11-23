@@ -1,5 +1,13 @@
 package common;
 
+/*
+ * This class provides functionality for 
+ * viewing the inventory.
+ * 
+ * @author Group1_Spree
+ * @version 1.0
+ */
+
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +19,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTable;
+
 import java.awt.Font;
+import java.io.IOException;
 
 public class ViewInventoryFrame {
 
@@ -27,15 +37,17 @@ public class ViewInventoryFrame {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public ViewInventoryFrame() {
+	public ViewInventoryFrame() throws IOException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void initialize() {
+	private void initialize() throws IOException {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,6 +67,8 @@ public class ViewInventoryFrame {
                 "Minimum Capacity",
                 "No Of Items",
                 "Last Date of Modification"};
+		
+		
 		
 		table = new JTable(data,columnNames);
 		table.setBounds(20, 70, 382, 160);

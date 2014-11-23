@@ -17,12 +17,15 @@ import java.io.FileReader;
 import java.sql.SQLException;
 import javax.swing.JLabel;
 
+/**
+* <h1>ParticipantProfileFrame</h1>
+* This class defines the shows the profile view of particpant
+* 
+* @author  Group_1 spree
+* @version 1.0
+*/
 public class ParticipantProfileFrame extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private String ID;
 	private Participant par; 
 	
@@ -52,7 +55,7 @@ public class ParticipantProfileFrame extends JFrame {
 			}
 		});
 
-		btnNewButton_1.setBounds(36, 183, 159, 28);
+		btnNewButton_1.setBounds(36, 183, 133, 28);
 		getContentPane().add(btnNewButton_1);
 
 		JButton btnNewButton_2 = new JButton("Register an Event");
@@ -70,13 +73,13 @@ public class ParticipantProfileFrame extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				par.displayDash();
-				// dashFrame.setVisible(true);
+				
 			}
 		});
 		
 		
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setBounds(36, 222, 159, 28);
+		btnNewButton.setBounds(36, 222, 133, 28);
 		getContentPane().add(btnNewButton);
 		
 		JLabel lblName = new JLabel("Name");
@@ -84,7 +87,7 @@ public class ParticipantProfileFrame extends JFrame {
 		getContentPane().add(lblName);
 		
 		JLabel lblId = new JLabel("ID : " + ID);
-		lblId.setBounds(303, 11, 89, 14);
+		lblId.setBounds(303, 11, 46, 14);
 		getContentPane().add(lblId);
 		
 		JLabel lblEMail = new JLabel("E Mail");
@@ -130,7 +133,7 @@ public class ParticipantProfileFrame extends JFrame {
 
 	public static void main(String[] args) {
 
-		final String id= "P_6";
+		final String id= "P_3";
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				createAndShowGUI();

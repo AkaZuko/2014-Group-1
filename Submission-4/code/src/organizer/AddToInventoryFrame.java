@@ -22,12 +22,20 @@ import common.AccData;
 
 import eventManager.EventManagerFrame;
 
+/**This Frame is used to add inventory items by the event manager
+ * 
+ * @author spree_group1
+ * @version 1.0
+ *
+ */
 public class AddToInventoryFrame extends JFrame{
 
 	private JFrame frame;
 	private static String ID;
 
-	
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args){
 		try{
 			AddToInventoryFrame var = new AddToInventoryFrame(ID);
@@ -38,6 +46,7 @@ public class AddToInventoryFrame extends JFrame{
 	}
 	/**
 	 * Frame for addition of resources in inventory
+	 @param id id number of Event Manager
 	 */
 	public AddToInventoryFrame(String id) {
 		this.ID=id;

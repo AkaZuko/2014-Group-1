@@ -1,23 +1,32 @@
 package participant;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import registration.Registeration;
+
 import common.AccData;
+import common.ViewInventoryFrame;
+
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
+/**
+ * <h1>UpdateProfileFrame</h1> This class defines the shows the profile view of
+ * particpant
+ * 
+ * @author Group_1 spree
+ * @version 1.0
+ */
 public class UpdateProfileFrame extends JFrame {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JLabel txtName;
 	private JTextField txtIns;
 	private JTextField txtAge;
@@ -35,32 +44,24 @@ public class UpdateProfileFrame extends JFrame {
 	private JLabel label3;
 	private JLabel label4;
 	private JLabel label5;
-	
-	public UpdateProfileFrame(final String id) {
+	private JButton btnBack;
+
+	public UpdateProfileFrame(String id) {
 		this.id = id;
-		
+
 		getContentPane().setLayout(null);
 		Participant par = new Participant(id);
 		txtName = new JLabel("Name :");
 		txtName.setBounds(36, 29, 48, 20);
 		getContentPane().add(txtName);
 		txtName.setBorder(null);
-		
-		
+
 		saveButton = new JButton("Save");
-		/*saveButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				
-				ParticipantProfileFrame parFrame = new ParticipantProfileFrame(id);
-				parFrame.setVisible(true);  
-	            dispose(); 
-			}
-		});*/
 		saveButton.setBounds(292, 208, 89, 23);
 		getContentPane().add(saveButton);
 		Handler handle = new Handler();
 		saveButton.addActionListener(handle);
-		
+
 		txtIns = new JTextField();
 		txtIns.setText("Institution :");
 		txtIns.setBounds(36, 60, 96, 20);
@@ -68,8 +69,7 @@ public class UpdateProfileFrame extends JFrame {
 		txtIns.setColumns(10);
 		txtIns.setEditable(false);
 		txtIns.setBorder(null);
-		
-		
+
 		txtAge = new JTextField();
 		txtAge.setText("Age:");
 		txtAge.setBounds(36, 91, 86, 20);
@@ -77,7 +77,7 @@ public class UpdateProfileFrame extends JFrame {
 		txtAge.setColumns(10);
 		txtAge.setEditable(false);
 		txtAge.setBorder(null);
-		
+
 		txtEmailAddress = new JTextField();
 		txtEmailAddress.setText(" Email Address :");
 		txtEmailAddress.setBounds(36, 122, 89, 20);
@@ -85,7 +85,7 @@ public class UpdateProfileFrame extends JFrame {
 		txtEmailAddress.setColumns(10);
 		txtEmailAddress.setEditable(false);
 		txtEmailAddress.setBorder(null);
-		
+
 		txtPassword = new JTextField();
 		txtPassword.setText("Password :");
 		txtPassword.setBounds(39, 153, 86, 20);
@@ -93,120 +93,158 @@ public class UpdateProfileFrame extends JFrame {
 		txtPassword.setColumns(10);
 		txtPassword.setEditable(false);
 		txtPassword.setBorder(null);
-		
+
 		txtname = new JTextField();
 		txtname.setBounds(142, 29, 218, 20);
 		getContentPane().add(txtname);
 		txtname.setColumns(10);
-		
+
 		txtinst = new JTextField();
 		txtinst.setBounds(142, 60, 218, 20);
 		getContentPane().add(txtinst);
 		txtinst.setColumns(10);
-		
+
 		txtage = new JTextField();
 		txtage.setBounds(142, 91, 218, 20);
 		getContentPane().add(txtage);
 		txtage.setColumns(10);
-		
+
 		txtemail = new JTextField();
 		txtemail.setBounds(142, 122, 218, 20);
 		getContentPane().add(txtemail);
 		txtemail.setColumns(10);
-		
+
 		txtpass = new JTextField();
 		txtpass.setBounds(142, 153, 218, 20);
 		getContentPane().add(txtpass);
 		txtpass.setColumns(10);
-		
+
 		label1 = new JLabel("");
 		label1.setBounds(10, 32, 28, 14);
 		getContentPane().add(label1);
-		
+
 		label2 = new JLabel("");
 		label2.setBounds(10, 63, 46, 14);
 		getContentPane().add(label2);
-		
+
 		label3 = new JLabel("");
 		label3.setBounds(10, 94, 46, 14);
 		getContentPane().add(label3);
-		
+
 		label4 = new JLabel("");
 		label4.setBounds(10, 125, 46, 14);
 		getContentPane().add(label4);
-		
+
 		label5 = new JLabel("");
 		label5.setBounds(10, 156, 46, 14);
 		getContentPane().add(label5);
+
+		btnBack = new JButton("Back");
+		btnBack.setBounds(73, 208, 89, 23);
+		getContentPane().add(btnBack);
 		setTitle("Update Profile");
 		setBounds(100, 100, 450, 300);
 	}
-	
+
 	class Handler implements ActionListener {
-		public void actionPerformed(ActionEvent e){
-			if(e.getSource().equals(saveButton)){
-				//sequence : name id pass email address age inst
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource().equals(saveButton)) {
+				// sequence : name id pass email address age inst
 				Boolean status = false;
-					try {
-						Connection conn = DriverManager.getConnection(AccData.getHost(), AccData.getUser(), AccData.getPass());
-						Statement s = conn.createStatement();
-						String query = "Update participantdata SET Name=\"" + txtname.getText() + 
-								"\",Password=\"" + txtpass.getText() + 
-								"\",Email=\"" + txtemail.getText() + 
-								"\",Age=" + txtage.getText() + 
-								",Institute=\"" + txtinst.getText() + 
-								"\" WHERE ID=\"" + id + "\";" ;
-						
-						String query2 = "Update logindata SET Name=\"" + txtname.getText() + 
-								"\",Password=\"" + txtpass.getText() + 
-								"\",Email=\"" + txtemail.getText() +  
-								"\" WHERE ID=\"" + id + "\";" ;
-						
-						if(validate())  {
-							status = s.execute(query);
-							status = s.execute(query2);
-							setVisible(false);
-							ParticipantProfileFrame par = new ParticipantProfileFrame(id);
-							par.setVisible(true);
-							}
-						s.close();
-						conn.close();
-					} catch (SQLException e1) {
-						System.out.println(e1.toString());
-					}
-				
-				//frame.setVisible(false);
-							
-			}
-		}
-			private Boolean validate(){
+				try {
 					
-				if(!txtname.getText().matches("([a-zA-Z]){1,} ([a-zA-Z]){1,}")) label1.setText("*");
-				else label1.setText("");	
-				
-				if(!txtemail.getText().matches("^[\\w-]+(?:\\.[\\w-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7}$")) label4.setText("*");
-				else label4.setText("");				
-				
-				if(txtpass.getText().isEmpty() || txtpass.getText().getBytes().length<6 ) label5.setText("*");
-				else label5.setText("");
-				
-				if(!txtage.getText().matches("[1-9][0-9]?[0-9]?")) label3.setText("*");
-				else label3.setText("");
-				
-				if(!txtinst.getText().matches("([a-zA-Z ^0-9]){1,}")) label2.setText("*");
-				else label2.setText("");
-				
-				if(label1.getText().equals("") && label2.getText().equals("") && label3.getText().equals("") && label4.getText().equals("") && label5.getText().equals("")) return true;
-				else return false;
+					Connection conn = DriverManager
+							.getConnection(
+									"jdbc:mysql://sql4.freemysqlhosting.net:3306/sql458738",
+									"sql458738", "dD9*gY3*");
+					Statement s = conn.createStatement();
+					String query = "Update participantdata SET Name=\""
+							+ txtname.getText() + "\",Password=\""
+							+ txtpass.getText() + "\",Email=\""
+							+ txtemail.getText() + "\",Age=" + txtage.getText()
+							+ ",Institute=\"" + txtinst.getText()
+							+ "\" WHERE ID=\"" + id + "\";";
+					String query2 = "Update logindata SET Name=\""
+							+ txtname.getText() + "\",Password=\""
+							+ txtpass.getText() + "\",Email=\""
+							+ txtemail.getText() + "\" WHERE ID=\"" + id
+							+ "\";";
+					if (validate()) {
+						status = s.execute(query);
+						status = s.execute(query2);
+						setVisible(false);
+						ParticipantProfileFrame par = new ParticipantProfileFrame(
+								id);
+						par.setVisible(true);
+					}
+					s.close();
+					conn.close();
+				} catch (SQLException e1) {
+					System.out.println(e1.toString());
+				}
+
+				// frame.setVisible(false);
 
 			}
+			if (e.getSource().equals(btnBack)) {
+				setVisible(false);
+				ParticipantProfileFrame par = new ParticipantProfileFrame(id);
+				par.setVisible(true);
+			}
+		}
+
+		/**
+		 * This is the validate() method which validates the updated profile of
+		 * participant
+		 * 
+		 * @param none
+		 * @return Boolean
+		 */
+		private Boolean validate() {
+
+			if (!txtname.getText().matches("([a-zA-Z]){1,} ([a-zA-Z]){1,}"))
+				label1.setText("*");
+			else
+				label1.setText("");
+
+			if (!txtemail.getText().matches(
+					"^[\\w-]+(?:\\.[\\w-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7}$"))
+				label4.setText("*");
+			else
+				label4.setText("");
+
+			if (txtpass.getText().isEmpty()
+					|| txtpass.getText().getBytes().length < 6)
+				label5.setText("*");
+			else
+				label5.setText("");
+
+			if (!txtage.getText().matches("[1-9][0-9]?[0-9]?"))
+				label3.setText("*");
+			else
+				label3.setText("");
+
+			if (!txtinst.getText().matches("([a-zA-Z ^0-9]){1,}"))
+				label2.setText("*");
+			else
+				label2.setText("");
+
+			if (label1.getText().equals("") && label2.getText().equals("")
+					&& label3.getText().equals("")
+					&& label4.getText().equals("")
+					&& label5.getText().equals(""))
+				return true;
+			else
+				return false;
+
+		}
 	}
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UpdateProfileFrame window = new UpdateProfileFrame("");
+					UpdateProfileFrame window = new UpdateProfileFrame("P_1");
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
